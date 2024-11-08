@@ -1,9 +1,9 @@
 // import Sidebar from "../sidebar/Sidebar";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import image1 from "../../assets/img/image1.png";
-import image2 from "../../assets/img/image2.png";
-import image3 from "../../assets/img/image3.png";
+import image1 from "../../assets/img/image1.jpg";
+import image2 from "../../assets/img/image2.jpg";
+import image3 from "../../assets/img/image3.jpg";
 import image4 from "../../assets/img/image4.jpg";
 import background from "../../assets/img/background.png";
 import StockData from "../stockData/StockData";
@@ -85,15 +85,15 @@ const Home = () => {
 
       <div className=" bg-[#F6F8F8] w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20">
+        <div className="mx-auto relative  m-2 rounded mt-20">
           <Carousel
             responsive={carouselSettings}
             infinite={true}
             autoPlay={true}
             autoPlaySpeed={9000}
             containerClass="z-10"
-            arrows={false}
-            showDots={false}
+            arrows={true}
+            showDots={true}
           >
             {/* Carousel items */}
             <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">

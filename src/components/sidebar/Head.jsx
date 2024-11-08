@@ -28,7 +28,7 @@ const Head = () => {
             onClick={toggleDropdown}
           />
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md text-xs">
+            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md text-xs z-50">
               <div className="pt-2 pl-2 font-bold">Umang Hitendra Shah</div>
               <div className="pl-2" style={{ fontSize: "12px" }}>
                 UID: 2659752
