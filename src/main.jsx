@@ -50,7 +50,6 @@ const router = createBrowserRouter(
       <Route path="/depositFunds" element={<Deposits />} />
       <Route path="/withdrawFunds" element={<WithdrawFunds />} />
       <Route path="/transferFunds" element={<TransferFunds />} />
-      {/* <Route path="/transactionHistory" element={<TransactionHistory />} /> */}
       <Route path="/mt5ToWallet" element={<MT5 />} />
       <Route path="/walletToMT5" element={<Wallet />} />
       <Route path="/download" element={<Download />} />
