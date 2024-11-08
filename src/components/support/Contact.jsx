@@ -15,10 +15,9 @@ const Contact = () => {
       <Side />
       <div className=" w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20">
-          <div>
-            <h1 className="text-xl">CONTACT US</h1>
-          </div>
+        <div className="mx-auto relative z-10 m-2 rounded mt-20 p-4">
+          <h1 className="text-xl">CONTACT US</h1>
+
           <div className="p-4">
             <p className="text-xs mb-4 text-gray-600">
               If you have questions or would like more information, please get
@@ -44,9 +43,7 @@ const Contact = () => {
               <p className="text-xs">
                 <FaComments className="inline mr-1" /> Live Chat
               </p>
-              {/* <label htmlFor="support-forms" className="text-xs font-medium mb-2">
-              Help & Support Forms:
-            </label> */}
+
               <select
                 id="support-forms"
                 value={selectedForm}

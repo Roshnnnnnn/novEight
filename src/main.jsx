@@ -28,6 +28,19 @@ import VipTradingRoom from "./components/VIP/VipTradingRoom.jsx";
 import ProfilePage from "./components/Profile/ProfilePage.jsx";
 import MyTicket from "./components/support/MyTicket.jsx";
 import Contact from "./components/support/Contact.jsx";
+import Overview from "./components/Rewards/Overview.jsx";
+import WheelSpin from "./components/Rewards/WheelSpin.jsx";
+import LuckyDraw from "./components/Rewards/LuckyDraw.jsx";
+import CashRedemption from "./components/Rewards/CashRedemption.jsx";
+import Voucher from "./components/Rewards/VouchersRedemption.jsx";
+import VisaPaymentDeposit from "./components/deposit/VisaPaymentDeposit.jsx";
+import CryptoCurrency from "./components/deposit/crypto/CryptoCurrency.jsx";
+import AppleGooglePay from "./components/deposit/AppleGooglePay.jsx";
+import BrokerToBrokerTransfer from "./components/deposit/BrokerToBrokerTransfer.jsx";
+import Volet from "./components/deposit/crypto/Volet.jsx";
+import BitWallet from "./components/deposit/crypto/BitWallet.jsx";
+import Skrill from "./components/deposit/crypto/Skrill.jsx";
+import Sticpay from "./components/deposit/crypto/Sticpay.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +50,7 @@ const router = createBrowserRouter(
       <Route path="/depositFunds" element={<Deposits />} />
       <Route path="/withdrawFunds" element={<WithdrawFunds />} />
       <Route path="/transferFunds" element={<TransferFunds />} />
+      {/* <Route path="/transactionHistory" element={<TransactionHistory />} /> */}
       <Route path="/mt5ToWallet" element={<MT5 />} />
       <Route path="/walletToMT5" element={<Wallet />} />
       <Route path="/download" element={<Download />} />
@@ -52,6 +66,22 @@ const router = createBrowserRouter(
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/ticket" element={<MyTicket />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/overview" element={<Overview />} />
+      <Route path="/wheelSpin" element={<WheelSpin />} />
+      <Route path="/luckyDraw" element={<LuckyDraw />} />
+      <Route path="/cashRedemption" element={<CashRedemption />} />
+      <Route path="/vouchersRedemption" element={<Voucher />} />
+      <Route path="/visaPaymentDeposit" element={<VisaPaymentDeposit />} />
+      <Route path="/cps/Cryptocurrency" element={<CryptoCurrency />} />
+      <Route path="/appleGooglePay" element={<AppleGooglePay />} />
+      <Route path="/cps/Volet" element={<Volet />} />
+      <Route
+        path="/brokerToBrokerTransfer"
+        element={<BrokerToBrokerTransfer />}
+      />
+      <Route path="/cps/Bitwallet" element={<BitWallet />} />
+      <Route path="/cps/Skrill" element={<Skrill />} />
+      <Route path="/cps/Sticpay" element={<Sticpay />} />
     </Route>
   )
 );

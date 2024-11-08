@@ -16,7 +16,7 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
-import Head from "./Head";
+
 import { Link } from "react-router-dom";
 
 const App = () => {
@@ -56,10 +56,7 @@ const App = () => {
       title: "Accounts",
       icon: FiUser,
       gap: true,
-      submenu: [
-        { title: "Open Live Account", link: "/accountManagement" },
-        { title: "Change Password", link: "/changePassword" },
-      ],
+      link: "/accountManagement",
     },
     {
       title: "Funds",
@@ -71,6 +68,7 @@ const App = () => {
         { title: "Transfer Between Account", link: "/transferFunds" },
         { title: "MT5 To Wallet", link: "/mt5ToWallet" },
         { title: "Wallet to MT5", link: "/walletToMT5" },
+        // { title: "Transaction History", link: "transactionHistory" },
       ],
     },
     {
@@ -118,11 +116,11 @@ const App = () => {
       icon: FiGift,
       gap: true,
       submenu: [
-        { title: "OverView" },
-        { title: "Wheel Spin" },
-        { title: "Lucky Draw" },
-        { title: "Cash Redemption" },
-        { title: "Vouchers Redemption" },
+        { title: "Overview", link: "/overview" },
+        { title: "Wheel Spin", link: "/wheelSpin" },
+        { title: "Lucky Draw", link: "/luckyDraw" },
+        { title: "Cash Redemption", link: "/cashRedemption" },
+        { title: "Vouchers Redemption", link: "/vouchersRedemption" },
       ],
     },
     {

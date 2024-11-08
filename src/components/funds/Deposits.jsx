@@ -9,6 +9,7 @@ import volet from "../../assets/img/volet.webp";
 import International from "../../assets/img/international.png";
 import Side from "../sidebar/Side";
 import Head from "../sidebar/Head";
+import { Link } from "react-router-dom";
 
 const Deposits = () => {
   const paymentMethods = [
@@ -16,6 +17,7 @@ const Deposits = () => {
       title: "Credit/Debit Card",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
+      link: "/visaPaymentDeposit",
       icon: (
         <img
           src={visa}
@@ -28,6 +30,7 @@ const Deposits = () => {
       title: "Cryptocurrency Deposit",
       fee: "$0 FEE",
       timing: "1 Hour",
+      link: "/cps/Cryptocurrency",
       icon: (
         <img
           src={bitcoin}
@@ -41,6 +44,7 @@ const Deposits = () => {
       title: "Apple Pay/Google Pay",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
+      link: "/appleGooglePay",
       icon: (
         <img
           src={apple}
@@ -53,6 +57,7 @@ const Deposits = () => {
       title: "Broker to Broker Transfer",
       fee: "$0* FEE",
       timing: "3-5 BUSINESS DAY/S",
+      link: "/brokerToBrokerTransfer",
       icon: (
         <img
           src={broker}
@@ -65,6 +70,7 @@ const Deposits = () => {
       title: "Volet",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
+      link: "/cps/Volet",
       icon: (
         <img
           src={volet}
@@ -89,6 +95,7 @@ const Deposits = () => {
       title: "Bitwallet Deposit",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
+      link: "/cps/Bitwallet",
       icon: (
         <img
           src={bit}
@@ -101,6 +108,7 @@ const Deposits = () => {
       title: "Skrill",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
+      link: "/cps/Skrill",
       icon: (
         <img
           src={skrill}
@@ -113,6 +121,7 @@ const Deposits = () => {
       title: "Sticpay",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
+      link: "/cps/Sticpay",
       icon: (
         <img
           src={stic}
@@ -136,17 +145,21 @@ const Deposits = () => {
                 key={index}
                 className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
-                <div className="flex flex-col items-center">
-                  <div className="h-10 object-contain mb-2">{method.icon}</div>
-                  <h3 className="font-medium text-gray-800 mb-3 text-sm">
-                    {method.title}
-                  </h3>
-                  <div className="flex items-center justify-between w-full text-gray-600 mb-3">
-                    <span style={{ fontSize: "13px" }}>{method.fee}</span>
-                    <span className="mx-1">|</span>
-                    <span style={{ fontSize: "14px" }}>{method.timing}</span>
+                <Link to={method.link || "#"}>
+                  <div className="flex flex-col items-center">
+                    <div className="h-10 object-contain mb-2">
+                      {method.icon}
+                    </div>
+                    <h3 className="font-medium text-gray-800 mb-3 text-sm">
+                      {method.title}
+                    </h3>
+                    <div className="flex items-center justify-between w-full text-gray-600 mb-3">
+                      <span style={{ fontSize: "13px" }}>{method.fee}</span>
+                      <span className="mx-1">|</span>
+                      <span style={{ fontSize: "14px" }}>{method.timing}</span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>
