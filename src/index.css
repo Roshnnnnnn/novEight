@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Color Palette 1 - Ocean Theme */
+.theme-ocean {
+  --primary: #0891b2; /* Cyan-600 */
+  --secondary: #155e75; /* Cyan-800 */
+  --accent: #67e8f9; /* Cyan-300 */
+  --background: #ecfeff; /* Cyan-50 */
+  --text: #164e63; /* Cyan-900 */
+}
+
+/* Modern Color Palette 2 - Forest Theme */
+.theme-forest {
+  --primary: #059669; /* Emerald-600 */
+  --secondary: #065f46; /* Emerald-800 */
+  --accent: #6ee7b7; /* Emerald-300 */
+  --background: #ecfdf5; /* Emerald-50 */
+  --text: #064e3b; /* Emerald-900 */
+}
+
+/* Modern Color Palette 3 - Sunset Theme */
+.theme-sunset {
+  --primary: #db2777; /* Pink-600 */
+  --secondary: #9d174d; /* Pink-800 */
+  --accent: #f9a8d4; /* Pink-300 */
+  --background: #fdf2f8; /* Pink-50 */
+  --text: #831843; /* Pink-900 */
+}
+
+/* Modern Color Palette 4 - Minimal Theme */
+.theme-minimal {
+  --primary: #4b5563; /* Gray-600 */
+  --secondary: #1f2937; /* Gray-800 */
+  --accent: #9ca3af; /* Gray-400 */
+  --background: #f9fafb; /* Gray-50 */
+  --text: #111827; /* Gray-900 */
+}
+
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+} */
