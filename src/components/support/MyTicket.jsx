@@ -52,16 +52,16 @@ const MyTicket = () => {
           <table className="min-w-full ">
             <thead>
               <tr>
-                <th className="p-2 font-normal text-sm">No.</th>
-                <th className="p-2 font-normal text-sm">Ticket No.</th>
-                <th className="p-2 font-normal text-sm">Description</th>
-                <th className="p-2 font-normal text-sm">Status</th>
-                <th className="p-2 font-normal text-sm">Last Updated</th>
+                <th className="p-2 font-normal text-xs">No.</th>
+                <th className="p-2 font-normal text-xs">Ticket No.</th>
+                <th className="p-2 font-normal text-xs">Description</th>
+                <th className="p-2 font-normal text-xs">Status</th>
+                <th className="p-2 font-normal text-xs">Last Updated</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="p-2 text-sm" colSpan="5">
+                <td className="p-2 text-xs" colSpan="5">
                   No Data
                 </td>
               </tr>
