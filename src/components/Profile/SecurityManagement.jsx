@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SecurityManagement = () => {
   const [isEmailToggled, setIsEmailToggled] = useState(false); // State for email toggle
@@ -13,11 +13,11 @@ const SecurityManagement = () => {
   };
 
   return (
-    <div className="p-8 bg-white shadow-md rounded-lg m-2">
+    <div className="p-8  shadow-md rounded-lg m-2">
       <div className="flex justify-center">
         <div className="w-[24rem] ">
           <h1 className="p-4">Authentication Method</h1>
-          <div className="p-2 bg-white shadow-md rounded-lg m-2 ">
+          <div className="p-2  shadow-md rounded-lg m-2 ">
             <div className="mb-4  pb-4">
               <div className="flex justify-between items-center">
                 <div>

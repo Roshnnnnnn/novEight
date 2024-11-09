@@ -1,4 +1,3 @@
-// import Sidebar from "../sidebar/Sidebar";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import image1 from "../../assets/img/image1.jpg";
@@ -6,7 +5,8 @@ import image2 from "../../assets/img/image2.jpg";
 import image3 from "../../assets/img/image3.jpg";
 import image4 from "../../assets/img/image4.jpg";
 import background from "../../assets/img/background.png";
-import StockData from "../stockData/StockData";
+// import StockData from "../stockData/StockData";
+import StockData from "./StockData";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
 import Side from "../sidebar/Side";
@@ -68,7 +68,7 @@ const Home = () => {
   const FlagComponent = countryFlags[selectedCountry];
 
   return (
-    <div className="bg-[#F6F8F8] flex">
+    <div className="flex bg-[#F6F7F8]">
       {/* Modal */}
       {isModalOpen && (
         <div
@@ -83,17 +83,17 @@ const Home = () => {
       )}
       <Side />
 
-      <div className=" bg-[#F6F8F8] w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
+      <div className=" w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative  m-2 rounded mt-20">
+        <div className="mx-auto relative m-2 rounded mt-16">
           <Carousel
             responsive={carouselSettings}
             infinite={true}
             autoPlay={true}
             autoPlaySpeed={9000}
-            containerClass="z-10"
-            arrows={true}
-            showDots={true}
+            containerClass="z-[-50]"
+            arrows={false}
+            showDots={false}
           >
             {/* Carousel items */}
             <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
@@ -167,24 +167,22 @@ const Home = () => {
                       <span className="text-sm sm:text-base md:text-lg lg:text-lg font-semibold">
                         {isVisible ? "0.00" : "****"}
                       </span>
-                      <span className="text-xs sm:text-xs md:text-base lg:text-xs text-gray-600">
-                        USD
-                      </span>
+
                       <select
-                        className="text-xs sm:text-xs md:text-base bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 sm:w-15"
+                        className="text-xs sm:text-xs md:text-base rounded-md sm:w-15 p-2 z-10 bg-white  dark:bg-gray-700"
                         style={{ fontSize: "15px" }}
                         value={selectedCountry}
                         onChange={(e) => setSelectedCountry(e.target.value)}
                       >
-                        <option value="US">United States</option>
-                        <option value="GB">United Kingdom</option>
-                        <option value="CA">Canada</option>
-                        <option value="AU">Australia</option>
-                        <option value="DE">Germany</option>
-                        <option value="FR">France</option>
-                        <option value="IT">Italy</option>
-                        <option value="JP">Japan</option>
-                        <option value="CN">China</option>
+                        <option value="CN">CN</option>
+                        <option value="JP">JP</option>
+                        <option value="IT">IT</option>
+                        <option value="FR">FR</option>
+                        <option value="DE">DE</option>
+                        <option value="AU">AU</option>
+                        <option value="CA">CA</option>
+                        <option value="GB">UK</option>
+                        <option value="US">US</option>
                       </select>
                     </div>
                   </div>
@@ -274,7 +272,8 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="mt-2">
+          <div className="mt-4 bg-white">
+            {/* <StockData /> */}
             <StockData />
           </div>
         </div>

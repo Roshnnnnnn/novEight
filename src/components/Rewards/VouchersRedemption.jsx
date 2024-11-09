@@ -7,11 +7,11 @@ import Reward from "../../assets/img/voucher.jpg";
 
 const VouchersRedemption = () => {
   return (
-    <div className="flex">
+    <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className="w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20 p-4">
+        <div className="mx-auto relative z-10 m-2 p-8 bg-white rounded-lg mt-16 z-[-50]">
           <div className="w-[100%] gap-x-6 flex ">
             <div
               className="h-[10rem] rounded-2xl w-[50rem] justify-center px-3 py-3 text-white bg-cover bg-center"

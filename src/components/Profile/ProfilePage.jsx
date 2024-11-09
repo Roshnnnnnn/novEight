@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import MyProfile from "./MyProfile";
@@ -66,22 +66,25 @@ const ProfilePage = () => {
   }, [defaultTab]);
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className=" w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20">
-          <div className="shadow-md rounded-lg p-4">
-            <div className="flex flex-wrap p-3 text-xs gap-x-4 overflow-auto">
+        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50] bg-white">
+          <div className="shadow-md rounded-lg p-2 bg-white">
+            <div className="flex flex-wrap p-3 flex flex-wrap p-3 bg-white text-xs gap-x-4 overflow-auto text-xs gap-x-4 overflow-auto">
               {TabButton.map((element, key) => (
-                <div className="me-2" key={key}>
-                  <div>
+                <div
+                  className="me-2 flex flex-wrap bg-white p-3 text-xs gap-x-4 overflow-auto"
+                  key={key}
+                >
+                  <div className="text-teal-900">
                     <button
                       className={`${
                         key === defaultTab
                           ? "is-active-tab btn font-bold bg-orange-500 border-b-2 border-orange-500 mb-1"
                           : "btn"
-                      } text-black text-xs bg-white`}
+                      }  text-xs bg-white`}
                       onClick={() => handleTab(key)}
                     >
                       {element.text}

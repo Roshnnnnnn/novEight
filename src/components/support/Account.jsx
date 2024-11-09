@@ -58,7 +58,7 @@ const Account = () => {
         <Head />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16">
           {/* Top Navigation - Made Responsive */}
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between">
             <div className="flex flex-col sm:flex-row gap-4">
               <select className="border rounded-md px-4 py-1 text-xs bg-white shadow-md">
                 <option>Live Account</option>
@@ -95,7 +95,7 @@ const Account = () => {
           </div>
 
           {/* Account Cards - Adjusted size and spacing */}
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 justify-center items-center">
+          <div className=" grid grid-cols-1 md:grid-cols-2 gap-x-2 justify-center items-center">
             {accounts.map((account) => (
               <div
                 key={account.id}
@@ -171,74 +171,39 @@ const Account = () => {
           {/* Modal */}
           {isModalOpen && (
             <div
-              className="fixed inset-0 text-xs flex items-center justify-center overlay bg-black bg-opacity-50"
+              className="fixed inset-0 flex items-center justify-center overlay bg-black bg-opacity-50"
               onClick={handleOverlayClick}
             >
               <div className="bg-white p-4 rounded shadow-lg">
                 <h2 className="text-lg font-bold">Open Account</h2>
                 {/* Form Elements */}
-                <div className="flex justify-center">
-                  <div>Live Account</div>
-                  <div>Demo Account</div>
-                </div>
                 <form>
-                  <label>Choose A Trading Platform</label>
+                  <label>Choose a Trading Platform</label>
                   <select className="border rounded-md w-full mb-2">
-                    <option>Recommended-MetaTrader 5</option>
+                    <option>MetaTrader 5</option>
                     {/* Other options... */}
                   </select>
-                  <label>Choose An Account Type</label>
+                  <label>Choose an Account Type</label>
                   <div className="flex gap-2 mb-2">
                     <button type="button" className="border rounded p-2">
                       Standard
                     </button>
                     <button type="button" className="border rounded p-2">
-                      Perpetual
+                      RAW
+                    </button>
+                    <button type="button" className="border rounded p-2">
+                      SWAP-FREE
                     </button>
                   </div>
-                  <label>Choose An Account Currency</label>
+                  <label>Choose an Account Currency</label>
                   <div className="flex gap-2 mb-2">
                     <button type="button" className="border rounded p-2">
                       USD
                     </button>
                     <button type="button" className="border rounded p-2">
-                      GBP
-                    </button>
-                    <button type="button" className="border rounded p-2">
                       EUR
                     </button>
-                    {/* Add other currencies... */}
-                  </div>
-                  <label>Choose Leverage</label>
-                  <div className="flex gap-2 mb-2">
-                    <button type="button" className="border rounded p-2">
-                      100 : 1
-                    </button>
-                    <button type="button" className="border rounded p-2">
-                      200 : 1
-                    </button>
-                    <button type="button" className="border rounded p-2">
-                      300 : 1
-                    </button>
-                    <button type="button" className="border rounded p-2">
-                      400 : 1
-                    </button>
-                    <button type="button" className="border rounded p-2">
-                      500 : 1
-                    </button>
-                  </div>
-                  <label>Account Balance</label>
-                  <div className="flex gap-2 mb-2">
-                    <button type="button" className="border rounded p-2">
-                      $1000
-                    </button>
-                    <button type="button" className="border rounded p-2">
-                      $2500
-                    </button>
-                    <button type="button" className="border rounded p-2">
-                      $5k
-                    </button>
-                    {/* Add other balances... */}
+                    {/* Other currencies... */}
                   </div>
                   <label>Additional Notes</label>
                   <input
@@ -330,6 +295,23 @@ const Account = () => {
                       </li>
                     </ol>
                   </div>
+
+                  {/* <div className="flex justify-center">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white rounded p-2"
+                      disabled={!isChecked}
+                    >
+                      Submit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={closeModal}
+                      className="border rounded p-2"
+                    >
+                      Cancel
+                    </button>
+                  </div> */}
                 </form>
               </div>
             </div>

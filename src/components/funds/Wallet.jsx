@@ -14,11 +14,11 @@ const Wallet = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className=" w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-24">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="flex flex-col items-center justify-center mx-auto relative z-10 m-2 rounded text-center shadow-lg border border-gray-300 p-4">
+        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 flex flex-col items-center justify-center mx-auto relative z-10  rounded text-center shadow-lg border border-gray-300 p-4">
           <div className="mb-4 w-[40%]">
             <label className="block text-xs font-medium text-gray-700 text-left">
               From

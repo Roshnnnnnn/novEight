@@ -27,70 +27,11 @@ const MT5 = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className=" w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-20 bg-white shadow-md rounded-lg p-6">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        {/* <form
-          onSubmit={handleSubmit}
-          className="mx-auto relative z-10 m-2 rounded mt-20"
-        >
-          <div className="flex flex-col items-center justify-center">
-            <div className="mb-4 w-[40%]">
-              <label className="block text-xs font-medium text-gray-700">
-                From
-              </label>
-              <select
-                className="mt-1 block w-full text-xs border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"
-                value={fromAccount}
-                onChange={handleFromChange}
-              >
-                {accounts.map((account, index) => (
-                  <option key={index} value={account}>
-                    {account}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4 w-[40%]">
-              <label className="block text-xs font-medium text-gray-700">
-                To
-              </label>
-              <select className="mt-1 block w-full text-xs border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50">
-                {getToAccountOptions().map((account, index) => (
-                  <option key={index} value={account}>
-                    {account}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-4 w-[40%]">
-              <label className="block text-xs font-medium text-gray-700">
-                Amount
-              </label>
-              <input
-                type="text"
-                value={amount}
-                onChange={handleAmountChange}
-                placeholder="Enter Amount"
-                className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
-                min="0"
-                style={{ MozAppearance: "textfield", appearance: "none" }}
-              />
-              <div className="mt-4">
-                <button
-                  type="submit"
-                  className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600"
-                  disabled={!amount}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
-          </div>
-        </form> */}
-
-        <div className="flex flex-col items-center justify-center mx-auto relative z-10  rounded text-center shadow-lg border border-gray-300 p-4">
+        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 flex flex-col items-center justify-center mx-auto relative z-10  rounded text-center shadow-lg border border-gray-300 p-4">
           <div className="mb-4 w-[40%]">
             <label className="block text-xs font-medium text-gray-700 text-left">
               From

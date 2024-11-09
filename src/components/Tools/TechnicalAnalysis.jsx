@@ -53,11 +53,11 @@ const TechnicalAnalysis = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className=" w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20">
+        <div className="mx-auto relative z-10 bg-white p-8 m-2 rounded-lg mt-16 z-[-50]">
           <div className="flex gap-6">
             {TabButton.map((element, key) => (
               <div

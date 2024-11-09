@@ -16,6 +16,7 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
+import logo from "../../assets/img/logo.png";
 
 import { Link } from "react-router-dom";
 
@@ -136,7 +137,7 @@ const App = () => {
 
   return (
     <div>
-      <div className="flex ">
+      <div className="flex bg-[#FFFFFF]">
         <div
           ref={sidebarRef}
           className={`${
@@ -152,11 +153,17 @@ const App = () => {
             {open ? <FiChevronLeft /> : <FiChevronRight />}
           </div>
           <div className="flex gap-x-4 items-center">
-            <FiPieChart className="text-4xl cursor-pointer" />
+            <div className="bg-black">
+              <Link to={"/"}>
+                <img src={logo} alt="" className="h-10 w-9 cursor-pointer" />
+              </Link>
+            </div>
             {open && (
-              <h1 className="text-black origin-left font-medium text-xl duration-200">
-                Novotrend
-              </h1>
+              <Link to={"/"}>
+                <h1 className="text-black origin-left font-medium text-xl duration-200">
+                  Novotrend
+                </h1>
+              </Link>
             )}
           </div>
           <ul className="pt-6 flex-grow custom-scrollbar">

@@ -42,11 +42,11 @@ const WithdrawalReport = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex bg-[#F6F7F8]">
       <Side />
-      <div className="w-full lg:w-3/4 mx-auto relative z-10 m-2 rounded mt-14">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20">
+        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16">
           {/* Date Filter Form */}
           <div className="bg-white shadow-lg rounded-lg p-8">
             <div className="flex flex-col lg:flex-row justify-between gap-4">

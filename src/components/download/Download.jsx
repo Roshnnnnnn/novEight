@@ -39,13 +39,13 @@ const Download = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className=" w-[70%] lg:w-[70%] xl:w-[70%] mx-auto relative z-10 m-2 rounded mt-4">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded mt-20">
-          <div className="">
-            <div className="p-2 rounded-lg flex mx-[6rem] bg-gradient-to-r from-orange-100 to-yellow-100">
+        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50]">
+          <div className="z-[-50]">
+            <div className="p-2 rounded-lg flex mx-auto bg-gradient-to-r from-orange-100 to-yellow-100">
               <div className="flex flex-col items-center">
                 <h1 className="text-transform: uppercase font-bold mb-2 text-xl">
                   Novotrend app
