@@ -58,7 +58,7 @@ const Overview = () => {
           <div className="mt-8">
             <div className="h-full bg-white rounded-lg shadow p-4">
               <div className="flex justify-center ">
-                <h1 className="text-xl">Discover Vantage Rewards</h1>
+                <h1 className="text-xl">Discover Novotrend Rewards</h1>
               </div>
               <div className="gap-x-10 flex justify-between mt-4 m-6 p-4">
                 <div className="text-center">
@@ -70,8 +70,8 @@ const Overview = () => {
                   />
                   <h3>Trade</h3>
                   <p className="text-xs mt-4 text-gray-500">
-                    Make every trade count by joining Vantage Rewards. N-Points
-                    are earned every time you trade.
+                    Make every trade count by joining Novotrend Rewards.
+                    N-Points are earned every time you trade.
                   </p>
                 </div>
                 <div className="text-center">

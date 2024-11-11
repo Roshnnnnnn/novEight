@@ -115,31 +115,6 @@ const Download = () => {
             </div>
 
             <div className="mt-3 mb-4 text-center">
-              <img src={Meta4} alt="" />
-            </div>
-            <div className="flex flex-wrap justify-between gap-4 ">
-              {Downloads.map((element, key) => (
-                <div className="" key={key}>
-                  <div className="py-4">
-                    <Link
-                      to=""
-                      className="text-white no-underline text-center flex flex-col gap-3"
-                    >
-                      <div className="bg-orange-400 rounded-lg shadow-lg p-4">
-                        <img
-                          src={element.Img}
-                          alt="Icons"
-                          className="w-full h-[4rem]"
-                        />
-                      </div>
-                      <p className="text-black">{element.OsName}</p>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-3 mb-4 text-center">
               <img src={Meta5} alt="" />
             </div>
             <div className="flex flex-wrap justify-between gap-4 ">

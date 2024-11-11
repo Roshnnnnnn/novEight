@@ -6,16 +6,18 @@ import {
   FiGlobe,
   FiLogOut,
 } from "react-icons/fi";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Head = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+    setDropdownOpen((prev) => !prev);
   };
 
   const handleNotificationClick = () => {
@@ -26,29 +28,51 @@ const Head = () => {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const dropdown = document.querySelector(".absolute");
-      if (dropdown && !dropdown.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    };
+  const handleDropdownClick = (event) => {
+    event.stopPropagation();
+  };
 
-    document.addEventListener("mousedown", handleClickOutside);
+  // useEffect(() => {
+  //   // const handleClickOutside = (event) => {
+  //   //   const dropdown = document.querySelector(".absolute");
+  //   //   const profileIcon = document.querySelector(".relative");
+  //   //   if (
+  //   //     dropdown &&
+  //   //     !dropdown.contains(event.target) &&
+  //   //     !profileIcon.contains(event.target)
+  //   //   ) {
+  //   //     setDropdownOpen(false);
+  //   //   }
+  //   // };
+  //   // document.addEventListener("mousedown", handleClickOutside);
+  //   // return () => {
+  //   //   document.removeEventListener("mousedown", handleClickOutside);
+  //   // };
+  // }, [isDropdownOpen]);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isDropdownOpen]);
+  const handleProfile = () => {
+    navigate("/profile");
+  };
+
+  const handleDownload = () => {
+    // Implement download functionality
+  };
+
+  const handleVerification = () => {
+    // Implement verification functionality
+  };
+
+  const handleFacialAuth = () => {
+    // Implement facial authentication functionality
+  };
+
+  const handleLogout = () => {
+    // Implement logout functionality
+  };
 
   return (
     <div className="">
       <div className="top-0 left-0 right-0 flex justify-end items-center p-4 fixed bg-white bg-opacity-50 backdrop-blur-sm">
-        <Link to="/depositFunds">
-          <div className="text-teal-900 cursor-pointer border rounded-3xl p-2">
-            Deposit
-          </div>
-        </Link>
         <FiGlobe className="text-teal-900 cursor-pointer ml-4 w-8" />
         <FiBell
           className="text-teal-900 cursor-pointer ml-4 w-8"
@@ -60,23 +84,44 @@ const Head = () => {
             onClick={toggleDropdown}
           />
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 p-2 w-60 bg-white shadow-lg rounded-md text-xs z-50">
+            <div
+              className="absolute right-0 mt-2 p-2 w-60 bg-white shadow-lg rounded-md text-xs z-50"
+              onClick={handleDropdownClick}
+            >
               <div className="pt-2 pl-2 text-sm font-bold">
                 Umang Hitendra Shah
               </div>
               <div className="pl-2" style={{ fontSize: "12px" }}>
                 UID: 2659752
               </div>
-              <div className="p-2 cursor-pointer flex items-center leading-6">
+              <div
+                className="p-2 cursor-pointer flex items-center leading-6"
+                onClick={handleProfile}
+              >
+                <GiPlagueDoctorProfile className="mr-2" /> Profile
+              </div>
+              <div
+                className="p-2 cursor-pointer flex items-center"
+                onClick={handleDownload}
+              >
                 <FiDownload className="mr-2" /> Download
               </div>
-              <div className="p-2 cursor-pointer flex items-center">
+              <div
+                className="p-2 cursor-pointer flex items-center"
+                onClick={handleVerification}
+              >
                 <FiCheckCircle className="mr-2" /> Verification
               </div>
-              <div className="p-2 cursor-pointer flex items-center">
+              <div
+                className="p-2 cursor-pointer flex items-center"
+                onClick={handleFacialAuth}
+              >
                 <FiCamera className="mr-2" /> Facial Authentication (optional)
               </div>
-              <div className="p-2 cursor-pointer flex items-center">
+              <div
+                className="p-2 cursor-pointer flex items-center"
+                onClick={handleLogout}
+              >
                 <FiLogOut className="mr-2" /> Logout
               </div>
             </div>
@@ -117,11 +162,11 @@ const Head = () => {
               <p className="text-xs" style={{ fontSize: "14px" }}>
                 Major events like this can create substantial trading
                 opportunities. Consider adding funds to maintain flexibility so
-                you can take advantage of potential price movements.
+                you can take adNovotrend of potential price movements.
               </p>
               <li>3. Stable Trading Conditions</li>
               <p className="text-xs" style={{ fontSize: "14px" }}>
-                Vantage remains committed to providing stable and competitive
+                Novotrend remains committed to providing stable and competitive
                 spreads, particularly on gold, Bitcoin, and oil, to support your
                 trading needs during volatile periods.
               </p>
@@ -142,13 +187,13 @@ const Head = () => {
               proper action in advance including adding funds on time.
             </p>
             <p className="pt-2 " style={{ fontSize: "14px" }}>
-              At Vantage, our team is committed to keeping you informed of
+              At Novotrend, our team is committed to keeping you informed of
               changing conditions to support you in navigating the upcoming
               election and any potential market fluctuations it may bring.
             </p>
             <p className="pt-2 " style={{ fontSize: "14px" }}>
               Should you have any questions, please do not hesitate to contact
-              our team at support@vantagemarkets.com.
+              our team at support@Novotrendmarkets.com.
             </p>
             <p style={{ fontSize: "14px" }}>Kind regards,</p>
             <p style={{ fontSize: "14px" }}>Novotrend</p>

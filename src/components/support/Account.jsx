@@ -20,7 +20,7 @@ const Account = () => {
       currency: "USD",
       leverage: "500:1",
       server: "Standard STP",
-      platform: "VantageInternational-Live 4",
+      platform: "NovotrendInternational-Live 4",
     },
     {
       id: "51627838",
@@ -31,7 +31,7 @@ const Account = () => {
       currency: "USD",
       leverage: "500:1",
       server: "Standard STP",
-      platform: "VantageInternational-Live 4",
+      platform: "NovotrendInternational-Live 4",
     },
     {
       id: "1461486",
@@ -40,7 +40,7 @@ const Account = () => {
       balance: "-",
       credits: "-",
       server: "Standard STP",
-      platform: "VantageInternational-Live",
+      platform: "NovotrendInternational-Live",
     },
   ];
 
@@ -249,17 +249,17 @@ const Account = () => {
                         I acknowledge that I have read, understood and accept
                         the{" "}
                         <a href="#" className="text-blue-500">
-                          Vantage Client Agreement
+                          Novotrend Client Agreement
                         </a>
                         ...
                       </li>
                       <li>
-                        I understand that Vantage will not provide me with any
+                        I understand that Novotrend will not provide me with any
                         investment advice...
                       </li>
                       <li>
                         I also confirm that I have read, understood and agree to
-                        be bound by Vantage{" "}
+                        be bound by Novotrend{" "}
                         <a href="#" className="text-blue-500">
                           Privacy Policy
                         </a>
@@ -278,7 +278,7 @@ const Account = () => {
                         in this application...
                       </li>
                       <li>
-                        I agree to be bound by Vantage’s{" "}
+                        I agree to be bound by Novotrend’s{" "}
                         <a href="#" className="text-blue-500">
                           deposits and withdrawals policy
                         </a>
@@ -286,12 +286,12 @@ const Account = () => {
                       </li>
                       <li>
                         I have read, understood and agreed to be bound by
-                        Vantage’s deposits and withdrawals policy.
+                        Novotrend’s deposits and withdrawals policy.
                       </li>
                       <li>
                         I confirm that my registration was made at my own
                         initiative and that no solicitation has been made by
-                        Vantage.
+                        Novotrend.
                       </li>
                     </ol>
                   </div>

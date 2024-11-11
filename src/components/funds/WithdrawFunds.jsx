@@ -32,7 +32,7 @@ const WithdrawFunds = () => {
         <div
           className="mx-auto relative z-10 m-2 rounded-lg mt-16 flex flex-col items-center justify-center mx-auto relative z-10  rounded text-center shadow-lg border border-gray-300 p-4"
           style={{
-            backgroundColor: "#F6F8F8",
+            backgroundColor: "white",
             width: "inherit",
             borderRadius: "20px",
           }}

@@ -16,7 +16,7 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logo (1).png";
 
 import { Link } from "react-router-dom";
 
@@ -106,12 +106,7 @@ const App = () => {
       icon: FiStar,
       gap: true,
     },
-    {
-      title: "Profile",
-      icon: FiUser,
-      link: "/profile",
-      gap: true,
-    },
+
     {
       title: "Rewards",
       icon: FiGift,
@@ -137,25 +132,25 @@ const App = () => {
 
   return (
     <div>
-      <div className="flex bg-[#FFFFFF]">
+      <div className="flex bg-[#FFFFFF]  z-50">
         <div
           ref={sidebarRef}
           className={`${
             open ? "w-50" : "w-30"
-          }  h-[100vh] p-5 relative duration-300 flex flex-col fixed top-0 `}
+          }  h-[100vh] p-5 relative fixed duration-300 flex flex-col fixed top-0 `}
           style={{ zIndex: "1000" }}
         >
           <div
-            className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full bg-white ${!open && "rotate-180"}`}
+            className={`absolute cursor-pointer -right-3 top-9 w-7 
+           border-2 rounded-full bg-white  ${!open && "rotate-180"}`}
             onClick={() => setOpen(!open)}
           >
             {open ? <FiChevronLeft /> : <FiChevronRight />}
           </div>
           <div className="flex gap-x-4 items-center">
-            <div className="bg-black">
+            <div>
               <Link to={"/"}>
-                <img src={logo} alt="" className="h-10 w-9 cursor-pointer" />
+                <img src={logo} alt="" className="h-9 w-9 cursor-pointer" />
               </Link>
             </div>
             {open && (

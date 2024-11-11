@@ -11,22 +11,22 @@ const BrokerToBrokerTransfer = () => {
           <div className="bg-white shadow-lg p-8 rounded-xl">
             <h2 className="text-xl font-bold">BROKER TO BROKER</h2>
             <p className="py-2 text-xs">
-              How to transfer funds from another broker to Vantage
+              How to transfer funds from another broker to Novotrend
             </p>
             <ol className="list-decimal ml-5 text-xs">
               <li>Download and complete the Broker to Broker Transfer Form</li>
               <li>
-                Complete the online form below and send to Support@vantage.com
+                Complete the online form below and send to Support@Novotrend.com
               </li>
               <li>
-                Vantage will verify the form and provide you the detail of
+                Novotrend will verify the form and provide you the detail of
                 transfer
               </li>
               <li>
                 Send the broker to broker detail to your previous broker to
                 request the transfer
               </li>
-              <li>Provide the transfer receipt to Vantage.</li>
+              <li>Provide the transfer receipt to Novotrend.</li>
             </ol>
             <form className="grid grid-cols-2 gap-4 mt-5 text-xs">
               <div className="mb-4">

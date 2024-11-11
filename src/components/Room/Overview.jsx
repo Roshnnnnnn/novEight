@@ -192,28 +192,29 @@ const Overview = () => {
         *To be eligible to use Live Trading Room service, you need to meet the
         initial minimum funding requirement indicated as above since the date of
         launch. You will need to complete at least $1,000 of notional value on
-        closed trades of products offered by Vantage each month to retain access
-        permission on Live Trading Room. Your access permission will be disabled
-        automatically if you fail to complete at least $1,000 of notional value
-        on closed trades in a month. You are required to further deposit the
-        required funding amount to reactivate access on Live Trading Room.
+        closed trades of products offered by Novotrend each month to retain
+        access permission on Live Trading Room. Your access permission will be
+        disabled automatically if you fail to complete at least $1,000 of
+        notional value on closed trades in a month. You are required to further
+        deposit the required funding amount to reactivate access on Live Trading
+        Room.
       </p>
       <p className="mt-4" style={{ fontSize: "11px" }}>
         Please be advised that the information presented on
-        vip.vantagemarkets.com is provided to Vantage (‘Vantage Global Limited’,
-        ‘we’) by a third-party provider (‘Everest Fortune Group’). It is
-        intended entirely for research and informational purposes only and does
-        not constitute any financial advice to buy, sell or hold a particular
-        product or pursue any particular investment strategy. The information is
-        not tailored to the investment needs of any specific person and
-        therefore does not involve a consideration of any of the investment
-        objectives, financial situation or needs of any viewer that may receive
-        it. Kindly also note that past performance is not a reliable indicator
-        of future performance and/or results. Actual results may differ
-        materially from those anticipated in forward-looking or past performance
-        statements. We assume no liability as to the accuracy or completeness of
-        any of the information provided herein, nor any loss that may arise from
-        any information supplied by Everest Fortune Group.
+        vip.Novotrendmarkets.com is provided to Novotrend (‘Novotrend Global
+        Limited’, ‘we’) by a third-party provider (‘Everest Fortune Group’). It
+        is intended entirely for research and informational purposes only and
+        does not constitute any financial advice to buy, sell or hold a
+        particular product or pursue any particular investment strategy. The
+        information is not tailored to the investment needs of any specific
+        person and therefore does not involve a consideration of any of the
+        investment objectives, financial situation or needs of any viewer that
+        may receive it. Kindly also note that past performance is not a reliable
+        indicator of future performance and/or results. Actual results may
+        differ materially from those anticipated in forward-looking or past
+        performance statements. We assume no liability as to the accuracy or
+        completeness of any of the information provided herein, nor any loss
+        that may arise from any information supplied by Everest Fortune Group.
       </p>
     </div>
   );

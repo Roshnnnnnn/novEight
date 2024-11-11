@@ -46,7 +46,7 @@ const IBWithrawal = () => {
       <Side />
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16">
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16">
           {/* Date Filter Form */}
           <div className="bg-white shadow-lg rounded-lg p-8">
             <div className="flex flex-col lg:flex-row justify-between gap-4">
@@ -59,7 +59,7 @@ const IBWithrawal = () => {
                 </label>
                 <input
                   type="date"
-                  className="mt-1 block w-full text-xs border-gray-300 rounded-md shadow-sm focus:ring focus:ring-orange-500"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
                   id="from"
                   value={fdate}
                   onChange={(e) => setFdate(e.target.value)}
@@ -75,7 +75,7 @@ const IBWithrawal = () => {
                 </label>
                 <input
                   type="date"
-                  className="mt-1 block w-full text-xs border-gray-300 rounded-md shadow-sm focus:ring focus:ring-orange-500"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
                   id="to"
                   value={edate}
                   onChange={(e) => setEdate(e.target.value)}
@@ -91,7 +91,7 @@ const IBWithrawal = () => {
                   Type
                 </label>
                 <select
-                  className="mt-1 block w-full text-xs border-gray-300 rounded-md shadow-sm focus:ring focus:ring-orange-500"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
                   id="transaction-type-select"
                   value={transactionType}
                   onChange={(e) => setTransactionType(e.target.value)}
@@ -110,7 +110,7 @@ const IBWithrawal = () => {
                   Status
                 </label>
                 <select
-                  className="mt-1 block w-full text-xs border-gray-300 rounded-md shadow-sm focus:ring focus:ring-orange-500"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
                   id="transaction-status-select"
                   value={transactionStatus}
                   onChange={(e) => setTransactionStatus(e.target.value)}
@@ -124,7 +124,7 @@ const IBWithrawal = () => {
 
               <div className="flex gap-2 mt-4 lg:mt-0">
                 <button
-                  className="btn text-xs text-white bg-orange-600 hover:bg-orange-700 rounded-md px-4 py-2 shadow-md transition duration-200"
+                  className="btn text-xs text-white bg-orange-600 hover:bg-orange-700 rounded-md px-4 shadow-md transition duration-200"
                   onClick={handleSubmit}
                   disabled={isSubmitButtonDisabled}
                 >

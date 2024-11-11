@@ -74,7 +74,7 @@ const ProTraderTool = () => {
             {ToolsCard.map((tool, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-r from-yellow-50 to-orange-50 text-xs rounded-lg p-4 shadow-md w-[23%] mb-4 h-[22rem] flex flex-col justify-between"
+                className="bg-white text-xs rounded-lg p-4 shadow-md w-[23%] mb-4 h-[22rem] flex flex-col justify-between transition-transform transform hover:-translate-y-1"
               >
                 <h3 className="text-lg my-3">{tool.ToolCardTitle}</h3>
                 <p

@@ -30,7 +30,7 @@ const BitWallet = () => {
                 </label>
                 <select
                   id="accountNumber"
-                  className="w-full p-2 border rounded shadow"
+                  className="w-full p-2 border rounded"
                 >
                   <option>Select</option>
                   {/* Add options here */}
@@ -43,7 +43,7 @@ const BitWallet = () => {
                 <input
                   type="number"
                   id="amount"
-                  className="w-full p-2 border rounded shadow"
+                  className="w-full p-2 border rounded"
                   defaultValue="0"
                 />
               </div>
@@ -53,7 +53,7 @@ const BitWallet = () => {
                 </label>
                 <input
                   id="notes"
-                  className="w-full p-2 border rounded shadow"
+                  className="w-full p-2 border rounded"
                   rows="3"
                 />
               </div>
@@ -64,10 +64,7 @@ const BitWallet = () => {
                 <label className="block mb-1" htmlFor="voucher">
                   Voucher
                 </label>
-                <select
-                  id="voucher"
-                  className="w-full p-2 border rounded shadow"
-                >
+                <select id="voucher" className="w-full p-2 border rounded">
                   <option>Select a deposit rebate voucher</option>
                   {/* Add options here */}
                 </select>
@@ -91,7 +88,7 @@ const BitWallet = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-orange-500 text-white p-1 px-2 rounded shadow"
+                className="bg-orange-500 text-white p-1 px-2 rounded"
               >
                 Submit
               </button>

@@ -74,19 +74,20 @@ const VisaPaymentDeposit = () => {
                   2. Please note that the transaction description that appears
                   on your card statement will vary depending on the financial
                   gateway used. If you have any concerns about the transaction's
-                  description, please contact support@vantagemarkets.com
+                  description, please contact support@Novotrendmarkets.com
                 </li>
                 <li>
-                  3. You will see on your billing statement- vantagemarkets.com
+                  3. You will see on your billing statement-
+                  Novotrendmarkets.com
                 </li>
                 <li>
                   4. The charge will appear on your credit card or bank
-                  statement as vantagemarketsco.uk. For information with your
+                  statement as Novotrendmarketsco.uk. For information with your
                   transaction, please contact our customer service via:
-                  support@vantagemarkets.com and +1(345) 769 1640
+                  support@Novotrendmarkets.com and +1(345) 769 1640
                 </li>
                 <li>
-                  5. This transaction is facilitated by Vantage Global Prime
+                  5. This transaction is facilitated by Novotrend Global Prime
                   LLP, 7 Bell Yard, London WC2A 2JR, UK.
                 </li>
               </ol>

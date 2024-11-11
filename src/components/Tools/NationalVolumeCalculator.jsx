@@ -17,13 +17,17 @@ const NationalVolumeCalculator = () => {
         <Head />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50]">
           <div className="flex justify-center ">
-            <div className="text-black p-4 border">
+            <div className="text-black p-4 border w-[25rem]">
               <div className="rounded shadow-lg p-2">
                 <form action="">
                   <div className="mt-3">
                     <span className="text-orange-500">*</span>
                     <label className="text-xs">Product</label>
-                    <select name="" id="" className=" w-full border text-xs">
+                    <select
+                      name=""
+                      id=""
+                      className="p-2 w-full border text-xs rounded"
+                    >
                       <option value="">Select</option>
                       <option value="">CHINA50</option>
                       <option value="">Nikkiei225</option>
@@ -31,8 +35,8 @@ const NationalVolumeCalculator = () => {
                       <option value="">ETHUSD</option>
                     </select>
                   </div>
-                  <div className="flex flex-wrap mt-2">
-                    <div className="w-full md:w-1/2">
+                  <div className="flex flex-wrap mt-2 gap-x-6">
+                    <div className="w-[10rem]">
                       <div className="flex flex-col">
                         <label className="text-xs">
                           <span className="text-orange-500">*</span>
@@ -41,11 +45,11 @@ const NationalVolumeCalculator = () => {
                         <input
                           type="number"
                           placeholder="0"
-                          className="border block text-xs rounded"
+                          className="border p-1 block text-xs rounded"
                         />
                       </div>
                     </div>
-                    <div className="w-full md:w-1/2">
+                    <div className="w-[10rem] ">
                       <div className="flex flex-col">
                         <label className="text-xs">
                           <span className="text-orange-500">*</span>
@@ -54,7 +58,7 @@ const NationalVolumeCalculator = () => {
                         <input
                           type="number"
                           placeholder="0"
-                          className="text-xs border rounded"
+                          className="text-xs p-1 border rounded"
                         />
                       </div>
                     </div>

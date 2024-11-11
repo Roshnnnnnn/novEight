@@ -34,10 +34,10 @@ const Contact = () => {
                 <FaEnvelope className="inline mr-1" />
 
                 <a
-                  href="mailto:support@vantagemarkets.com"
+                  href="mailto:support@Novotrendmarkets.com"
                   className="text-blue-500 underline"
                 >
-                  support@vantagemarkets.com
+                  support@Novotrendmarkets.com
                 </a>
               </p>
               <p className="text-xs">
@@ -54,9 +54,11 @@ const Contact = () => {
                   Help & Support Forms
                 </option>
                 <option value="partnership">Partnership Transfer Form</option>
-                <option value="trade">Vantage Trade Investigation Form</option>
+                <option value="trade">
+                  Novotrend Trade Investigation Form
+                </option>
                 <option value="opt-out">
-                  Opt Out of Vantage Promotions Form
+                  Opt Out of Novotrend Promotions Form
                 </option>
                 <option value="closure">Account Closure Request Form</option>
               </select>
