@@ -57,48 +57,48 @@ const Download = () => {
                   <p>Get the App</p>
                 </div>
                 <div className="flex justify-center gap-4 items-center">
-                  <button className="radius  ">
+                  <button className="radius">
                     <img
                       src={Play}
                       alt="Google Play Store"
                       style={{
-                        width: "80%",
+                        maxWidth: "80%",
                         height: "auto",
                         display: "block",
                         margin: "auto",
                       }}
                     />
                   </button>
-                  <button className="radius  ">
+                  <button className="radius">
                     <img
                       src={ios}
                       alt="App Store"
                       style={{
-                        width: "80%",
+                        maxWidth: "80%",
                         height: "auto",
                         display: "block",
                         margin: "auto",
                       }}
                     />
                   </button>
-                  <button className="radius  ">
+                  <button className="radius">
                     <img
                       src={Android}
                       alt="App Store"
                       style={{
-                        width: "80%",
+                        maxWidth: "80%",
                         height: "auto",
                         display: "block",
                         margin: "auto",
                       }}
                     />
                   </button>
-                  <button className="radius  ">
+                  <button className="radius">
                     <img
                       src={QR}
                       alt="QR"
                       style={{
-                        width: "80%",
+                        maxWidth: "80%",
                         height: "auto",
                         display: "block",
                         margin: "auto",
@@ -109,13 +109,17 @@ const Download = () => {
               </div>
               <div className="ml-[15rem] flex justify-center">
                 <div>
-                  <img src={phone} alt="" className="w-[auto] h-[15rem]" />
+                  <img
+                    src={phone}
+                    alt=""
+                    className="w-[auto] h-[15rem] max-w-full"
+                  />
                 </div>
               </div>
             </div>
 
             <div className="mt-3 mb-4 text-center">
-              <img src={Meta5} alt="" />
+              <img src={Meta5} alt="" className="max-w-full" />
             </div>
             <div className="flex flex-wrap justify-between gap-4 ">
               {Downloads.map((element, key) => (
@@ -129,7 +133,7 @@ const Download = () => {
                         <img
                           src={element.Img}
                           alt="Icons"
-                          className="w-full h-[4rem]"
+                          className="w-full h-[4rem] max-w-full"
                         />
                       </div>
                       <p className="text-black py-4">{element.OsName}</p>

@@ -23,7 +23,6 @@ const Account = () => {
   const [accountType, setAccountType] = useState("");
   const [activeLeverage, setActiveLeverage] = useState("100 : 1");
   const [selectedCurrency, setSelectedCurrency] = useState("");
-  const [selectedBalance, setSelectedBalance] = useState("$1000");
 
   const openAccountModal = () => setIsAccountModalOpen(true);
   const closeAccountModal = () => setIsAccountModalOpen(false);
@@ -59,7 +58,7 @@ const Account = () => {
     },
     {
       id: "1461486",
-      type: "MT5",
+      type: "CT",
       status: "Inactive",
       balance: "-",
       credits: "-",
@@ -86,40 +85,38 @@ const Account = () => {
         <Head />
         <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16">
           {/* Top Navigation - Made Responsive */}
-          <div className="flex justify-between mb-4">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <select
-                className="border rounded-md px-4 py-1 text-xs bg-white shadow-md"
-                id="accountTypeSelector"
-                onChange={handleAccountTypeChange}
-              >
-                <option>Live Account</option>
-                <option>Demo Account</option>
-              </select>
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4">
+            <select
+              className="border rounded-md px-4 py-1 text-xs bg-white shadow-md w-full"
+              id="accountTypeSelector"
+              onChange={handleAccountTypeChange}
+            >
+              <option>Live Account</option>
+              <option>Demo Account</option>
+            </select>
 
-              <select
-                className="border rounded-md px-4 py-1 text-xs bg-white shadow-md"
-                id="statusSelector"
-              >
-                <option>All</option>
-                <option>Active</option>
-                <option>Rejected</option>
-                <option>Processing</option>
-                <option>Pending</option>
-                <option>Inactive</option>
-              </select>
-              <select
-                className="border rounded-md px-4 py-2 text-xs bg-white shadow-md"
-                id="platformSelector"
-              >
-                <option disabled>Trading Platforms</option>
-                <option>All</option>
-                <option>MT4</option>
-                <option>MT5</option>
-                <option>Copy Trading</option>
-              </select>
-            </div>
-            <div className="flex gap-4 w-full sm:w-auto justify-end text-xs">
+            <select
+              className="border rounded-md px-4 py-1 text-xs bg-white shadow-md w-full"
+              id="statusSelector"
+            >
+              <option>All</option>
+              <option>Active</option>
+              <option>Rejected</option>
+              <option>Processing</option>
+              <option>Pending</option>
+              <option>Inactive</option>
+            </select>
+            <select
+              className="border rounded-md px-4 py-2 text-xs bg-white shadow-md w-full"
+              id="platformSelector"
+            >
+              <option disabled>Trading Platforms</option>
+              <option>All</option>
+              <option>MT4</option>
+              <option>MT5</option>
+              <option>Copy Trading</option>
+            </select>
+            <div className="flex gap-4 w-full sm:w-auto justify-end text-xs mt-2 sm:mt-0">
               <button
                 onClick={openModal}
                 className="bg-white text-red-500 px-4 py-2 rounded-md flex items-center justify-center"
@@ -134,7 +131,7 @@ const Account = () => {
           </div>
 
           {/* Account Cards - Adjusted size and spacing */}
-          <div className=" grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 justify-center items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 text-xs gap-y-2 justify-center items-center">
             {accounts.map((account) => (
               <div
                 key={account.id}
@@ -160,7 +157,7 @@ const Account = () => {
                 </div>
 
                 {/* Balance Display - Updated with country flag */}
-                <div className="flex items-center  mb-1">
+                <div className="flex items-center mb-1">
                   <GBFlag className="w-3 h-3 mr-1" />
                   <span className="text-xs font-medium">{account.balance}</span>
                   <span className="ml-1 text-xs text-gray-500">
@@ -169,17 +166,19 @@ const Account = () => {
                 </div>
 
                 {/* Credits & Balance */}
-                <div className="flex gap-2 mb-1 text-xs my-2">
+                <div className="grid grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-2 mb-1 text-xs my-2">
                   <div>
-                    <span className="text-gray-500 font-bold">Credits: </span>
-                    <span className="font-bold">{account.credits}</span>
-                    <span className="ml-1 text-red-500">!</span>
+                    <span className="text-gray-500 font-bold text-xs">
+                      Credits:{" "}
+                    </span>
+                    <span className="font-bold text-xs">{account.credits}</span>
+                    <span className="ml-1 text-red-500 text-xs">!</span>
                   </div>
                   <div>
-                    <span className="text-gray-500">Balance: </span>
-                    <span>{account.balance}</span>
+                    <span className="text-gray-500 text-xs">Balance: </span>
+                    <span className="text-xs">{account.balance}</span>
                   </div>
-                  <div className="flex gap-1 justify-end text-gray-600 pl-[9rem]">
+                  <div className="flex gap-1 justify-end text-gray-600">
                     <button className="px-2 py-1 border rounded text-xs hover:bg-gray-200">
                       <Link to={"/depositFunds"}>Deposit</Link>
                     </button>
@@ -385,7 +384,7 @@ const Account = () => {
                           type="button"
                           className={`rounded p-2 w-full text-xs ${
                             activeLeverage === leverage
-                              ? "border border-orange-500 bg-orange-100 text-orange-500"
+                              ? "bg-orange-500 text-white border border-orange-500"
                               : "bg-[#F6F8F8] text-[#2C3E50]"
                           }`}
                           onClick={() => setActiveLeverage(leverage)}
@@ -398,20 +397,24 @@ const Account = () => {
                       Account Balance
                     </label>
                     <div className="flex gap-2 mb-2">
-                      {["$1000", "$2500", "$5k"].map((balance) => (
-                        <button
-                          key={balance}
-                          type="button"
-                          className={`border rounded p-2 w-full text-xs ${
-                            selectedBalance === balance
-                              ? "border border-orange-500 bg-orange-100 text-orange-500"
-                              : "bg-[#F6F8F8] text-[#2C3E50]"
-                          }`}
-                          onClick={() => setSelectedBalance(balance)}
-                        >
-                          {balance}
-                        </button>
-                      ))}
+                      <button
+                        type="button"
+                        className="border rounded p-2 w-full text-xs"
+                      >
+                        $1000
+                      </button>
+                      <button
+                        type="button"
+                        className="border rounded p-2 w-full text-xs"
+                      >
+                        $2500
+                      </button>
+                      <button
+                        type="button"
+                        className="border rounded p-2 w-full text-xs"
+                      >
+                        $5k
+                      </button>
                       {/* Add other balances... */}
                     </div>
                     <label className="block mb-1 text-xs">

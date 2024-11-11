@@ -1,52 +1,68 @@
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 
+const truncateOption = (option) => {
+  const words = option.split(" ");
+  return window.innerWidth <= 768 && words.length > 15
+    ? words.slice(0, 15).join(" ") + "..."
+    : option;
+};
+
 const TransferFunds = () => {
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 flex flex-col items-center justify-center mx-auto relative rounded-3xl text-center shadow-lg border border-gray-300 p-4">
-          <div className="mb-4 w-[40%]">
-            <label className="block text-xs font-medium text-gray-700 text-left">
-              From
-            </label>
-            <select className="mt-1 block w-full border border-gray-300 rounded text-sm shadow-sm pl-4 h-10">
-              <option>516025557 - $0.00 USD - Hedge STP</option>
-              <option>516025557 - $0.00 USD - Hedge STP</option>
-              <option>516025557 - $0.00 USD - Hedge STP</option>
-              {/* Add more options as needed */}
-            </select>
-          </div>
-          <div className="mb-4 w-[40%]">
-            <label className="block text-xs font-medium text-gray-700 text-left">
-              To
-            </label>
-            <select className="mt-1 block w-full border border-gray-300 rounded text-sm shadow-sm pl-4 h-10">
-              <option>516278838 - $0.00 USD - Hedge STP</option>
-              <option>516278838 - $0.00 USD - Hedge STP</option>
-              <option>516278838 - $0.00 USD - Hedge STP</option>
-              {/* Add more options as needed */}
-            </select>
-          </div>
-          <div className="mb-4 w-[40%]">
-            <label className="block text-xs font-medium text-gray-700 text-left">
-              Amount
-            </label>
-            <input
-              type="text"
-              // value={amount}
-              // onChange={handleAmountChange}
-              placeholder="Enter Amount"
-              className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
-              min="0"
-              style={{ MozAppearance: "textfield", appearance: "none" }}
-            />
-            <div className="mt-4">
-              <button className="w-full w-[40%] bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
-                Submit
-              </button>
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16  bg-white items-center justify-center w-full  text-center shadow-lg border border-gray-300 p-4">
+          <div className="mb-4 w-full md:w-[40%] ">
+            <div className="flex flex-col justify-center w-full mx-auto">
+              <label className="block text-xs font-medium text-gray-700 text-left">
+                From
+              </label>
+              <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
+                <option>
+                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
+                </option>
+                <option>
+                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
+                </option>
+                <option>
+                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
+                </option>
+                {/* Add more options as needed */}
+              </select>
+
+              <div className="mb-4 w-full">
+                <label className="block text-xs font-medium text-gray-700 text-left">
+                  To
+                </label>
+                <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
+                  <option>516278838 - $0.00 USD - Hedge STP</option>
+                  <option>516278838 - $0.00 USD - Hedge STP</option>
+                  <option>516278838 - $0.00 USD - Hedge STP</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+              <div className="mb-4 w-full">
+                <label className="block text-xs font-medium text-gray-700 text-left">
+                  Amount
+                </label>
+                <input
+                  type="text"
+                  // value={amount}
+                  // onChange={handleAmountChange}
+                  placeholder="Enter Amount"
+                  className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
+                  min="0"
+                  style={{ MozAppearance: "textfield", appearance: "none" }}
+                />
+                <div className="mt-4">
+                  <button className="w-full md:w-[40%] bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
+                    Submit
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

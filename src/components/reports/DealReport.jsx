@@ -59,7 +59,7 @@ const DealReport = () => {
                 </label>
                 <input
                   type="date"
-                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded focus:outline-none"
                   id="from"
                   value={fdate}
                   onChange={(e) => setFdate(e.target.value)}
@@ -75,7 +75,7 @@ const DealReport = () => {
                 </label>
                 <input
                   type="date"
-                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded focus:outline-none"
                   id="to"
                   value={edate}
                   onChange={(e) => setEdate(e.target.value)}
@@ -91,7 +91,7 @@ const DealReport = () => {
                   Type
                 </label>
                 <select
-                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded focus:outline-none"
                   id="transaction-type-select"
                   value={transactionType}
                   onChange={(e) => setTransactionType(e.target.value)}
@@ -110,7 +110,7 @@ const DealReport = () => {
                   Status
                 </label>
                 <select
-                  className="mt-1 block w-full text-xs border-gray-300 rounded  focus:outline-none"
+                  className="mt-1 block w-full text-xs border-gray-300 rounded focus:outline-none"
                   id="transaction-status-select"
                   value={transactionStatus}
                   onChange={(e) => setTransactionStatus(e.target.value)}
@@ -122,7 +122,7 @@ const DealReport = () => {
                 </select>
               </div>
 
-              <div className="flex gap-2 mt-4 lg:mt-0">
+              <div className="flex gap-2 mt-4 lg:mt-0 flex-wrap">
                 <button
                   className="btn text-xs text-white bg-orange-600 hover:bg-orange-700 rounded-md px-4 shadow-md transition duration-200"
                   onClick={handleSubmit}
@@ -152,37 +152,41 @@ const DealReport = () => {
             </p>
 
             {/* Deposit Table */}
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="border text-xs">Date</th>
-                  <th className="border text-xs">Amount</th>
-                  <th className="border text-xs">Payment Type</th>
-                  <th className="border text-xs">Receipt</th>
-                  <th className="border text-xs">Comment</th>
-                  <th className="border text-xs">Status</th>
-                  <th className="border text-xs">Remark</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-4 py-4 text-xs text-gray-500">
-                    Invalid Date
-                  </td>
-                  <td className="px-4 py-4 text-xs text-gray-500">1000.00</td>
-                  <td className="px-4 py-4 text-xs text-gray-500">cash</td>
-                  <td className="px-4 py-4 text-xs text-gray-500">Receipt</td>
-                  <td className="px-4 py-4 text-xs text-gray-500">
-                    kr diya na
-                  </td>
-                  <td className="px-4 py-4 text-xs text-gray-500">Approved</td>
-                  <td className="px-4 py-4 text-xs text-gray-500">
-                    kr diya na
-                  </td>
-                </tr>
-                {/* Add more rows as needed */}
-              </tbody>
-            </table>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="border text-xs">Date</th>
+                    <th className="border text-xs">Amount</th>
+                    <th className="border text-xs">Payment Type</th>
+                    <th className="border text-xs">Receipt</th>
+                    <th className="border text-xs">Comment</th>
+                    <th className="border text-xs">Status</th>
+                    <th className="border text-xs">Remark</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td className="px-4 py-4 text-xs text-gray-500">
+                      Invalid Date
+                    </td>
+                    <td className="px-4 py-4 text-xs text-gray-500">1000.00</td>
+                    <td className="px-4 py-4 text-xs text-gray-500">cash</td>
+                    <td className="px-4 py-4 text-xs text-gray-500">Receipt</td>
+                    <td className="px-4 py-4 text-xs text-gray-500">
+                      kr diya na
+                    </td>
+                    <td className="px-4 py-4 text-xs text-gray-500">
+                      Approved
+                    </td>
+                    <td className="px-4 py-4 text-xs text-gray-500">
+                      kr diya na
+                    </td>
+                  </tr>
+                  {/* Add more rows as needed */}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

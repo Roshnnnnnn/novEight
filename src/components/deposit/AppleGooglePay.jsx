@@ -1,5 +1,6 @@
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
+import gpay from "../../assets/img/gpay.png";
 
 const AppleGooglePay = () => {
   return (
@@ -29,6 +30,7 @@ const AppleGooglePay = () => {
             </p>
             <div className="py-4">
               <h1>Apple Pay/Google Pay FORM</h1>
+              <img src="" alt="" />
             </div>
             <form className="grid grid-cols-2 gap-4">
               <div className="mb-4 text-xs">

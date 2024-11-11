@@ -71,7 +71,7 @@ const Head = () => {
   };
 
   return (
-    <div className="">
+    <div className="hidden md:block">
       <div className="top-0 left-0 right-0 flex justify-end items-center p-4 fixed bg-white bg-opacity-50 backdrop-blur-sm">
         <FiGlobe className="text-teal-900 cursor-pointer ml-4 w-8" />
         <FiBell

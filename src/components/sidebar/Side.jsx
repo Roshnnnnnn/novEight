@@ -90,35 +90,35 @@ const App = () => {
       icon: FiDownload,
       gap: true,
     },
-    {
-      title: "Tools",
-      icon: FiSettings,
-      gap: true,
-      submenu: [
-        { title: "Pro Trader Tool", link: "/tradingTool" },
-        { title: "Technical Analysis", link: "/technicalAnalysis" },
-        { title: "National Volume Calculator", link: "/tradingCalculator" },
-      ],
-    },
-    {
-      title: "VIP Trading Room",
-      link: "/vip-trading-room",
-      icon: FiStar,
-      gap: true,
-    },
+    // {
+    //   title: "Tools",
+    //   icon: FiSettings,
+    //   gap: true,
+    //   submenu: [
+    //     { title: "Pro Trader Tool", link: "/tradingTool" },
+    //     { title: "Technical Analysis", link: "/technicalAnalysis" },
+    //     { title: "National Volume Calculator", link: "/tradingCalculator" },
+    //   ],
+    // },
+    // {
+    //   title: "VIP Trading Room",
+    //   link: "/vip-trading-room",
+    //   icon: FiStar,
+    //   gap: true,
+    // },
 
-    {
-      title: "Rewards",
-      icon: FiGift,
-      gap: true,
-      submenu: [
-        { title: "Overview", link: "/overview" },
-        { title: "Wheel Spin", link: "/wheelSpin" },
-        { title: "Lucky Draw", link: "/luckyDraw" },
-        { title: "Cash Redemption", link: "/cashRedemption" },
-        { title: "Vouchers Redemption", link: "/vouchersRedemption" },
-      ],
-    },
+    // {
+    //   title: "Rewards",
+    //   icon: FiGift,
+    //   gap: true,
+    //   submenu: [
+    //     { title: "Overview", link: "/overview" },
+    //     { title: "Wheel Spin", link: "/wheelSpin" },
+    //     { title: "Lucky Draw", link: "/luckyDraw" },
+    //     { title: "Cash Redemption", link: "/cashRedemption" },
+    //     { title: "Vouchers Redemption", link: "/vouchersRedemption" },
+    //   ],
+    // },
     {
       title: "Support",
       icon: FiHelpCircle,
@@ -132,17 +132,16 @@ const App = () => {
 
   return (
     <div>
-      <div className="flex bg-[#FFFFFF]  z-50">
+      <div className="flex bg-[#FFFFFF]  z-[-50]">
         <div
           ref={sidebarRef}
           className={`${
             open ? "w-50" : "w-30"
-          }  h-[100vh] p-5 relative fixed duration-300 flex flex-col fixed top-0 `}
+          } h-[100vh] p-5 relative duration-300 flex flex-col fixed top-0`}
           style={{ zIndex: "1000" }}
         >
           <div
-            className={`absolute cursor-pointer -right-3 top-9 w-7 
-           border-2 rounded-full bg-white  ${!open && "rotate-180"}`}
+            className={`absolute cursor-pointer -right-3 top-9 w-7 border-2 rounded-full bg-white transition-transform duration-300 ease-in-out`}
             onClick={() => setOpen(!open)}
           >
             {open ? <FiChevronLeft /> : <FiChevronRight />}
@@ -200,7 +199,7 @@ const App = () => {
                           key={subIndex}
                           className="flex rounded-md p-2 cursor-pointer  text-xs items-center gap-x-4"
                         >
-                          <a href={subItem.link || "#"}>{subItem.title}</a>
+                          <Link to={subItem.link || "#"}>{subItem.title}</Link>
                         </li>
                       ))}
                     </ul>
@@ -221,8 +220,8 @@ const App = () => {
           >
             <ul>
               {Menus[openSubmenu].submenu.map((subItem, subIndex) => (
-                <li key={subIndex} className="p-2  cursor-pointer text-xs">
-                  {subItem.title}
+                <li key={subIndex} className="p-2 cursor-pointer text-xs">
+                  <Link to={subItem.link || "#"}>{subItem.title}</Link>
                 </li>
               ))}
             </ul>

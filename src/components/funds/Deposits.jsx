@@ -139,7 +139,7 @@ const Deposits = () => {
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
         <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 cursor-pointer">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 z-[50]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 z-[50]">
             {paymentMethods.map((method, index) => (
               <div
                 key={index}
@@ -171,10 +171,10 @@ const Deposits = () => {
                     <h3 className="font-medium text-gray-800 mb-3 text-sm">
                       {method.title}
                     </h3>
-                    <div className="flex items-center justify-between w-full text-gray-600 mb-3">
-                      <span style={{ fontSize: "13px" }}>{method.fee}</span>
+                    <div className="flex items-center justify-center w-full text-gray-600 mb-3">
+                      <span style={{ fontSize: "11px" }}>{method.fee}</span>
                       <span className="mx-1">|</span>
-                      <span style={{ fontSize: "14px" }}>{method.timing}</span>
+                      <span style={{ fontSize: "11px" }}>{method.timing}</span>
                     </div>
                   </div>
                 )}

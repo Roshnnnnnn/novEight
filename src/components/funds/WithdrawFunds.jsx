@@ -30,14 +30,13 @@ const WithdrawFunds = () => {
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
         <div
-          className="mx-auto relative z-10 m-2 rounded-lg mt-16 flex flex-col items-center justify-center mx-auto relative z-10  rounded text-center shadow-lg border border-gray-300 p-4"
+          className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 flex flex-col items-center justify-center w-full p-4"
           style={{
             backgroundColor: "white",
-            width: "inherit",
             borderRadius: "20px",
           }}
         >
-          <h2 className="text-xl font-semibold text-teal-900 mb-4 flex items-center justify-center">
+          <h2 className="text-xl md:text-2xl font-semibold text-teal-900 mb-4 flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-gray-500 mr-2"
@@ -53,45 +52,47 @@ const WithdrawFunds = () => {
             Withdraw funds
           </h2>
 
-          <div className="mb-4 flex justify-center">
-            <label className="block text-gray-600 font-medium text-xs">
+          <div className="mb-4 flex justify-center w-full">
+            <label className="block text-gray-600 font-medium text-xs md:text-xs">
               Account Number
             </label>
-            <p className="text-gray-700 text-xs pl-2">
+            <p className="text-gray-700 text-xs md:text-xs pl-2">
               51602557 - $0.00 USD - Hedge STP
             </p>
           </div>
 
-          <div className="flex items-center mb-2 justify-center">
+          <div className="flex items-center mb-2 justify-center w-full">
             <input
               type="text"
               value={amount}
               onChange={handleAmountChange}
               placeholder="Enter Amount"
-              className="w-32 p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
+              className="w-full max-w-xs p-2 text-xs md:text-sm text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
               min="0"
               style={{ MozAppearance: "textfield", appearance: "none" }}
             />
             <span
-              className="text-gray-500 font-medium text-xs mx-2 cursor-pointer"
+              className="text-gray-500 font-medium text-xs md:text-sm mx-2 cursor-pointer"
               onClick={() => setAmount(0)}
             >
               MAX
             </span>
             <button
               onClick={handleContinue}
-              className={`w-[140px] py-2 ml-[85px] text-white font-semibold rounded-md float-right ${
+              className={`w-full max-w-[140px] py-2 ml-2 text-white font-semibold rounded-md float-right ${
                 amount > 0
                   ? "bg-orange-500 hover:bg-orange-600"
                   : "bg-orange-200 cursor-not-allowed"
               }`}
               disabled={amount <= 0}
             >
-              Continue
+              <span className="text-xs md:text-sm">Continue</span>
             </button>
           </div>
 
-          {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-xs md:text-sm mt-1">{error}</p>
+          )}
         </div>
       </div>
     </div>

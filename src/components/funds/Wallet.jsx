@@ -18,30 +18,30 @@ const Wallet = () => {
       <Side />
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 flex flex-col items-center justify-center mx-auto relative rounded-3xl text-center shadow-lg border border-gray-300 p-4">
-          <div className="mb-4 w-[40%]">
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 flex flex-col items-center justify-center w-full max-w-md mx-auto relative rounded-3xl text-center shadow-lg border border-gray-300 p-4">
+          <div className="mb-4 w-full md:w-[40%]">
             <label className="block text-xs font-medium text-gray-700 text-left">
               From
             </label>
-            <select className="mt-1 block w-full border border-gray-300 rounded text-sm shadow-sm pl-4 h-10">
+            <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
               <option>516025557 - $0.00 USD - Hedge STP</option>
               <option>516025557 - $0.00 USD - Hedge STP</option>
               <option>516025557 - $0.00 USD - Hedge STP</option>
               {/* Add more options as needed */}
             </select>
           </div>
-          <div className="mb-4 w-[40%]">
+          <div className="mb-4 w-full md:w-[40%]">
             <label className="block text-xs font-medium text-gray-700 text-left">
               To
             </label>
-            <select className="mt-1 block w-full border border-gray-300 rounded text-sm shadow-sm pl-4 h-10">
+            <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
               <option>516278838 - $0.00 USD - Hedge STP</option>
               <option>516278838 - $0.00 USD - Hedge STP</option>
               <option>516278838 - $0.00 USD - Hedge STP</option>
               {/* Add more options as needed */}
             </select>
           </div>
-          <div className="mb-4 w-[40%]">
+          <div className="mb-4 w-full md:w-[40%]">
             <label className="block text-xs font-medium text-gray-700 text-left">
               Amount
             </label>
@@ -55,7 +55,7 @@ const Wallet = () => {
               style={{ MozAppearance: "textfield", appearance: "none" }}
             />
             <div className="mt-4">
-              <button className="w-full w-[40%] bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
+              <button className="w-full md:w-[40%] bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
                 Submit
               </button>
             </div>
