@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
+import Navbar from "../sidebar/Navbar";
 
 const MyTicket = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,9 +29,10 @@ const MyTicket = () => {
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50] max-w-full">
+        <Navbar />
+        <div className="mx-auto relative z-10 m-2 rounded-lg  z-[-50] max-w-full">
           <h1 className="text-xl mb-4 text-center">MY SUPPORT TICKETS</h1>
           <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-x-2">
             <div className="relative w-full md:w-auto">

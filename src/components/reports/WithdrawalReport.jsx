@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
+import Navbar from "../sidebar/Navbar";
 
 const WithdrawalReport = () => {
   const [fdate, setFdate] = useState("");
@@ -44,13 +45,14 @@ const WithdrawalReport = () => {
   return (
     <div className="flex bg-[#F6F7F8]">
       <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      <div className="w-[60%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16">
+        <Navbar />
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg ">
           {/* Date Filter Form */}
           <div className="bg-white shadow-lg rounded-lg p-8">
-            <div className="flex flex-col lg:flex-row justify-between gap-4">
-              <div className="form-group flex-1">
+            <div className="flex flex-col md:flex-row justify-between gap-4">
+              <div className="form-group flex-1 md:flex-1">
                 <label
                   htmlFor="from"
                   className="block text-xs font-medium text-gray-700"
@@ -66,7 +68,7 @@ const WithdrawalReport = () => {
                   max={today}
                 />
               </div>
-              <div className="form-group flex-1">
+              <div className="form-group flex-1 md:flex-1">
                 <label
                   htmlFor="to"
                   className="block text-xs font-medium text-gray-700"
@@ -83,7 +85,7 @@ const WithdrawalReport = () => {
                 />
               </div>
 
-              <div className="form-group flex-1">
+              <div className="form-group flex-1 md:flex-1">
                 <label
                   htmlFor="transaction-type-select"
                   className="block text-xs font-medium text-gray-900"
@@ -102,7 +104,7 @@ const WithdrawalReport = () => {
                   <option>Crypto</option>
                 </select>
               </div>
-              <div className="form-group flex-1">
+              <div className="form-group flex-1 md:flex-1">
                 <label
                   htmlFor="transaction-status-select"
                   className="block text-xs font-medium text-gray-700"

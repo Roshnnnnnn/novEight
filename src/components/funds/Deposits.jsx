@@ -10,6 +10,7 @@ import International from "../../assets/img/international.png";
 import Side from "../sidebar/Side";
 import Head from "../sidebar/Head";
 import { Link } from "react-router-dom";
+import Navbar from "../sidebar/Navbar";
 
 const Deposits = () => {
   const paymentMethods = [
@@ -136,10 +137,11 @@ const Deposits = () => {
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 cursor-pointer">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 z-[50]">
+        <Navbar />
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg cursor-pointer">
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 z-[50] lg:w-full md:w-[18rem]">
             {paymentMethods.map((method, index) => (
               <div
                 key={index}

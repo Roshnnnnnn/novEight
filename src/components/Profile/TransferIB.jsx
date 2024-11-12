@@ -2,7 +2,7 @@ const TransferIB = () => {
   return (
     <div className=" p-4 bg-white rounded-lg shadow-md ">
       <form>
-        <div className="mb-4 grid grid-cols-2 gap-4 items-center">
+        <div className="mb-4 grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4 items-center">
           <div>
             <label
               htmlFor="partnershipType"
@@ -12,7 +12,7 @@ const TransferIB = () => {
             </label>
             <select
               id="partnershipType"
-              className="mt-1 block w-full border rounded-md shadow-sm h-12"
+              className="mt-1  pl-4 block w-full border rounded-md shadow-sm h-12 focus:outline-none"
             >
               <option value="" disabled></option>
               <option value="">Select Partnership Type</option>
@@ -31,7 +31,7 @@ const TransferIB = () => {
             <input
               id="newCPAID"
               type="text"
-              className="mt-1 p-4 block w-full border rounded-md shadow-sm h-12"
+              className="mt-1 p-4 block w-full border rounded-md shadow-sm h-12 focus:outline-none"
               placeholder="Enter details"
             />
           </div>
@@ -42,7 +42,7 @@ const TransferIB = () => {
             Reason for Transfer
           </label>
           <textarea
-            className="mt-1 p-4 block w-full border rounded-md shadow-sm h-24"
+            className="mt-1 p-4 block w-full border rounded-md shadow-sm h-24 focus:outline-none"
             rows="4"
             placeholder="Enter reason"
           />

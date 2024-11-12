@@ -85,7 +85,7 @@ const StockData = () => {
                       key === defaultTab
                         ? "is-active-tab btn font-bold bg-orange-500 border-b-2 border-orange-500 mb-1"
                         : "btn"
-                    }  text-xs bg-white`}
+                    } text-xs bg-white w-full sm:w-auto`}
                     onClick={() => handleTab(key)}
                   >
                     {element.text}

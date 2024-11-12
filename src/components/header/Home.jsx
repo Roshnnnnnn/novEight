@@ -10,6 +10,9 @@ import StockData from "./StockData";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
 import Side from "../sidebar/Side";
+import Promotion from "../../assets/img/Promotion.png";
+import Account from "../../assets/img/Account.png";
+import Deposit from "../../assets/img/Deposit.png";
 
 import {
   GB,
@@ -22,10 +25,10 @@ import {
   JP,
   CN,
 } from "country-flag-icons/react/3x2";
-
 import { IoWalletOutline, IoArrowForward, IoArrowBack } from "react-icons/io5";
 import Head from "../sidebar/Head";
 import { Link } from "react-router-dom";
+import Navbar from "../sidebar/Navbar";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -33,20 +36,20 @@ const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState("US");
   const [activeButton, setActiveButton] = useState(null);
 
-  // Consolidate carousel responsive settings
+  // Update carousel settings to show only one item
   const carouselSettings = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 2,
+      items: 2, // Show 1 item on desktop
       partialVisibilityGutter: 30,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 1,
+      items: 1, // Show 1 item on tablet
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
+      breakpoint: { max: 204, min: 0 },
+      items: 1, // Show 1 item on mobile
     },
   };
 
@@ -69,10 +72,10 @@ const Home = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed top-0 left-0 right-0 bg-black bg-opacity-50 flex items-center justify-center z-50 h-[100vh]"
+          className="fixed top-0 left-0 right-0 bg-black bg-opacity-50 flex items-center justify-center z-50 h-[100vh] transition-opacity duration-500 ease-in-out opacity-100"
           onClick={() => setIsModalOpen(false)}
         >
-          <div className="bg-[#F6F8F8] p-4 rounded shadow-lg mt-4">
+          <div className="bg-[#F6F8F8] p-4 rounded shadow-lg mt-4 transform transition-transform duration-500 ease-in-out scale-100">
             <h2 className="text-lg">Welcome to the Home Page!</h2>
             <p>Click anywhere to close this modal.</p>
           </div>
@@ -80,65 +83,138 @@ const Home = () => {
       )}
       <Side />
 
-      <div className=" w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
+        <Navbar />
         <Head />
         <div>
-          <div className="mx-auto relative m-2 rounded mt-16 mb-6 ">
-            <Carousel
-              responsive={carouselSettings}
-              infinite={true}
-              autoPlay={true}
-              autoPlaySpeed={9000}
-              containerClass="z-[-50]"
-              arrows={false}
-              showDots={false}
-            >
-              {/* Carousel items */}
-              <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
-                <div className="overflow-hidden rounded-lg">
-                  <img
-                    src={image1}
-                    alt="Image 1"
-                    className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover hover:scale-105 transition-transform duration-300"
-                  />
+          <div>
+            <div className="lg:hidden bg-white p-4 rounded-xl shadow-xl">
+              <div className="">
+                <div className="mb-4 flex gap-x-2 mb-3">
+                  <h1>Total Assets Estimate</h1>
+                  {isVisible ? (
+                    <IoEyeOutline
+                      className="text-gray-800 text-xs sm:text-xs md:text-base mr-2 mt-1 cursor-pointer"
+                      onClick={() => setIsVisible(false)}
+                    />
+                  ) : (
+                    <IoEyeOffOutline
+                      className="text-gray-800 text-xs sm:text-lg md:text-base mr-2 mt-1 cursor-pointer"
+                      onClick={() => setIsVisible(true)}
+                    />
+                  )}
                 </div>
-              </div>
+                <div className="flex justify-between mt-1">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <span className="w-4 h-3 sm:w-5 sm:h-4 md:w-6 md:h-4 ">
+                      <FlagComponent title={selectedCountry} />
+                    </span>
+                    <span className="text-sm sm:text-base md:text-lg lg:text-lg font-semibold">
+                      {isVisible ? "0.00" : "****"}
+                    </span>
 
-              <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
-                <div className="overflow-hidden rounded-lg">
-                  <img
-                    src={image2}
-                    alt="Image 2"
-                    className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover"
-                  />
+                    <select
+                      className="text-xs sm:text-xs md:text-base rounded-md  sm:w-15 p-2 z-10 bg-white dark:bg-gray-700 focus:outline-none"
+                      style={{ fontSize: "15px" }}
+                      value={selectedCountry}
+                      onChange={(e) => setSelectedCountry(e.target.value)}
+                    >
+                      <option value="CN">CN</option>
+                      <option value="JP">JP</option>
+                      <option value="IT">IT</option>
+                      <option value="FR">FR</option>
+                      <option value="DE">DE</option>
+                      <option value="AU">AU</option>
+                      <option value="CA">CA</option>
+                      <option value="GB">UK</option>
+                      <option value="US">US</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button className="bg-orange-500 text-xs text-white p-2 rounded-lg">
+                      <Link to={"/depositFunds"}>Deposit</Link>
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
-                <div className="overflow-hidden rounded-lg">
-                  <img
-                    src={image3}
-                    alt="Image 3"
-                    className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover"
-                  />
+              <div>
+                <div className="flex justify-around">
+                  <div className="flex flex-col items-center">
+                    <Link to="/accountManagement" className="text-xs">
+                      <img src={Account} alt="" className="w-8 h-8" />
+                      Account
+                    </Link>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <Link to="/depositFunds" className="text-xs">
+                      <img src={Deposit} alt="" className="w-8 h-8" />
+                      Deposit
+                    </Link>
+                  </div>
+                  {/* <div className="flex flex-col items-center">
+                    <img src={Promotion} alt="" className="w-8 h-8" />
+                    <Link to="/promotion" className="text-xs">
+                      Promotion
+                    </Link>
+                  </div> */}
                 </div>
               </div>
-
-              <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
-                <div className="overflow-hidden rounded-lg">
-                  <img
-                    src={image4}
-                    alt="Image 4"
-                    className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover"
-                  />
-                </div>
-              </div>
-            </Carousel>
+            </div>
           </div>
+          {/* <div className="mx-auto relative m-2 rounded lg:mt-16 md:mt-4 sm:mt-4 mb-6 hidden lg:block"> </div> */}
+          {/* <Carousel
+            responsive={carouselSettings}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={9000}
+            containerClass="z-[-50]"
+            arrows={false}
+            showDots={false}
+          >
+            <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={image1}
+                  alt="Image 1"
+                  className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
 
-          <div className="relative z-[-50] mt-4">
-            <div className="bg-white rounded-lg overflow-hidden p-4">
-              <div className="overflow-hidden rounded-lg flex flex-col md:flex-row m-2">
+            <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={image2}
+                  alt="Image 2"
+                  className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={image3}
+                  alt="Image 3"
+                  className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="bg-[#F6F8F8] rounded-lg overflow-hidden block hover:shadow-lg transition-shadow mx-2">
+              <div className="overflow-hidden rounded-lg">
+                <img
+                  src={image4}
+                  alt="Image 4"
+                  className="w-full h-[50px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-cover"
+                />
+              </div>
+            </div>
+          </Carousel> */}
+
+          <div className="relative  mt-4">
+            <div className="bg-white rounded-lg overflow-hidden p-4 hidden lg:block">
+              <div className=" overflow-hidden rounded-lg flex flex-col md:flex-row m-2">
                 <div className="flex-1 mb-4 md:mb-0 mx-2">
                   <div className="flex items-center justify-between">
                     <div className="text-gray-800 text-xs sm:text-base md:text-md mb-1 flex items-center">
@@ -167,7 +243,7 @@ const Home = () => {
                         </span>
 
                         <select
-                          className="text-xs sm:text-xs md:text-base rounded-md sm:w-15 p-2 z-10 bg-white dark:bg-gray-700"
+                          className="text-xs sm:text-xs md:text-base  rounded-md sm:w-15 p-2 z-10 bg-white dark:bg-gray-700"
                           style={{ fontSize: "15px" }}
                           value={selectedCountry}
                           onChange={(e) => setSelectedCountry(e.target.value)}
@@ -186,12 +262,15 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 w-full">
+                  <div className="grid grid-cols-2 sm:grid-cols-1 sm:flex sm:flex-wrap gap-2 w-full">
                     <button
                       className={`w-full sm:flex-1 min-w-[30px] border border-black text-black ${
                         activeButton === "deposit" ? "bg-blue-500" : ""
                       } py-1 rounded hover:bg-blue-50 hover:text-black transition-colors text-[10px] sm:text-xs`}
-                      onClick={() => setActiveButton("deposit")}
+                      onClick={() => {
+                        console.log("Deposit button clicked");
+                        setActiveButton("deposit");
+                      }}
                     >
                       <span className="hidden max-[600px]:block">
                         <IoWalletOutline className="mx-auto text-lg" />
@@ -204,7 +283,10 @@ const Home = () => {
                       className={`w-full sm:flex-1 min-w-[30px] border border-black text-black ${
                         activeButton === "transfer" ? "bg-blue-500" : ""
                       } py-1 rounded hover:bg-blue-50 hover:text-black transition-colors text-[10px] sm:text-xs`}
-                      onClick={() => setActiveButton("transfer")}
+                      onClick={() => {
+                        console.log("Transfer button clicked");
+                        setActiveButton("transfer");
+                      }}
                     >
                       <span className="hidden max-[600px]:block">
                         <IoArrowForward className="mx-auto text-lg" />
@@ -217,7 +299,10 @@ const Home = () => {
                       className={`w-full sm:flex-1 min-w-[30px] border border-black text-black ${
                         activeButton === "withdraw" ? "bg-blue-500" : ""
                       } py-1 rounded hover:bg-blue-50 hover:text-black transition-colors text-[10px] sm:text-xs`}
-                      onClick={() => setActiveButton("withdraw")}
+                      onClick={() => {
+                        console.log("Withdraw button clicked");
+                        setActiveButton("withdraw");
+                      }}
                     >
                       <span className="hidden max-[600px]:block">
                         <IoArrowBack className="mx-auto text-lg" />
@@ -277,7 +362,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-4 bg-white">
+            <div className="mt-4 bg-white rounded-xl shadow-2xl">
               {/* <StockData /> */}
               <StockData />
             </div>

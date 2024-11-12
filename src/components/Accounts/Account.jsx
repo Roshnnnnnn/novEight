@@ -13,6 +13,7 @@ import pamm from "../../assets/img/pamm.png";
 import perpetual from "../../assets/img/perpetual.png";
 import { Link } from "react-router-dom";
 import Phone from "../../assets/img/download_phone.webp";
+import Navbar from "../sidebar/Navbar";
 
 const Account = () => {
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
@@ -81,11 +82,12 @@ const Account = () => {
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16">
+        <Navbar />
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg  md:mt-4 h-[80vh]">
           {/* Top Navigation - Made Responsive */}
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-4">
+          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-4">
             <select
               className="border rounded-md px-4 py-1 text-xs bg-white shadow-md w-full"
               id="accountTypeSelector"
@@ -131,7 +133,7 @@ const Account = () => {
           </div>
 
           {/* Account Cards - Adjusted size and spacing */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 text-xs gap-y-2 justify-center items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-x-4 text-xs gap-y-2 justify-center items-center">
             {accounts.map((account) => (
               <div
                 key={account.id}
@@ -165,30 +167,31 @@ const Account = () => {
                   </span>
                 </div>
 
-                {/* Credits & Balance */}
-                <div className="grid grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-2 mb-1 text-xs my-2">
-                  <div>
+                {/* Credits & Balance - Moved below other elements */}
+                <div className=" gap-2 mb-1 text-xs my-2 ">
+                  <div className="flex items-center">
                     <span className="text-gray-500 font-bold text-xs">
                       Credits:{" "}
                     </span>
                     <span className="font-bold text-xs">{account.credits}</span>
                     <span className="ml-1 text-red-500 text-xs">!</span>
-                  </div>
-                  <div>
                     <span className="text-gray-500 text-xs">Balance: </span>
                     <span className="text-xs">{account.balance}</span>
                   </div>
-                  <div className="flex gap-1 justify-end text-gray-600">
-                    <button className="px-2 py-1 border rounded text-xs hover:bg-gray-200">
+                </div>
+                {/* Adjusted position of the button section */}
+                <div className=" flex flex-col md:flex-row sm:flex-row  justify-end text-gray-600">
+                  <div className="gap-2">
+                    <button className="px-2 py-1 border rounded text-xs hover:bg-gray-200 w-full sm:w-auto mb-2">
                       <Link to={"/depositFunds"}>Deposit</Link>
                     </button>
                     <button
-                      className="px-2 py-1 border rounded text-xs hover:bg-gray-200"
+                      className="px-2 py-1 border rounded text-xs hover:bg-gray-200 w-full sm:w-auto mb-2"
                       onClick={openTradeModal}
                     >
                       Trade
                     </button>
-                    <button className="p-1 border rounded hover:bg-gray-200">
+                    <button className="p-1 border rounded hover:bg-gray-200 w-full sm:w-auto">
                       ⚙️
                     </button>
                   </div>

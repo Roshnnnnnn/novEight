@@ -13,6 +13,7 @@ import Meta5 from "../../assets/img/meta5.png";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import { Link } from "react-router-dom";
+import Navbar from "../sidebar/Navbar";
 
 const Download = () => {
   const Downloads = [
@@ -40,88 +41,63 @@ const Download = () => {
 
   return (
     <div className="flex bg-[#F6F8F8]">
-      <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      {/* <Side /> */}
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[80%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
-        <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50]">
+        <Navbar />
+        <div className="mx-auto relative z-10 m-2 rounded-lg lg:mt-16 z-[-50]">
           <div className="z-[-50]">
-            <div className="p-2 rounded-lg flex mx-auto bg-gradient-to-r from-orange-100 to-yellow-100">
+            <div className="p-2 rounded-lg flex flex-col md:flex-row mx-auto bg-gradient-to-r from-orange-100 to-yellow-100">
               <div className="flex flex-col items-center">
                 <h1 className="text-transform: uppercase font-bold mb-2 text-xl">
                   Novotrend app
                 </h1>
-                <p className="mb-4 text-xs">
+                <p className="mb-4 text-xs text-center md:text-left">
                   Download the Novotrend App on App store and Google Play Store
                 </p>
                 <div className="my-3 text-gray-500">
                   <p>Get the App</p>
                 </div>
-                <div className="flex justify-center gap-4 items-center">
+                <div className="flex justify-center gap-4 items-center flex-wrap">
                   <button className="radius">
                     <img
                       src={Play}
                       alt="Google Play Store"
-                      style={{
-                        maxWidth: "80%",
-                        height: "auto",
-                        display: "block",
-                        margin: "auto",
-                      }}
+                      className="max-w-[80%] h-auto"
                     />
                   </button>
                   <button className="radius">
                     <img
                       src={ios}
                       alt="App Store"
-                      style={{
-                        maxWidth: "80%",
-                        height: "auto",
-                        display: "block",
-                        margin: "auto",
-                      }}
+                      className="max-w-[80%] h-auto"
                     />
                   </button>
                   <button className="radius">
                     <img
                       src={Android}
                       alt="App Store"
-                      style={{
-                        maxWidth: "80%",
-                        height: "auto",
-                        display: "block",
-                        margin: "auto",
-                      }}
+                      className="max-w-[80%] h-auto"
                     />
                   </button>
                   <button className="radius">
-                    <img
-                      src={QR}
-                      alt="QR"
-                      style={{
-                        maxWidth: "80%",
-                        height: "auto",
-                        display: "block",
-                        margin: "auto",
-                      }}
-                    />
+                    <img src={QR} alt="QR" className="max-w-[80%] h-auto" />
                   </button>
                 </div>
               </div>
-              <div className="ml-[15rem] flex justify-center">
-                <div>
-                  <img
-                    src={phone}
-                    alt=""
-                    className="w-[auto] h-[15rem] max-w-full"
-                  />
-                </div>
+              <div className="flex justify-center mt-4 md:mt-0 md:ml-[15rem]">
+                <img
+                  src={phone}
+                  alt=""
+                  className="w-[auto] h-[15rem] max-w-full"
+                />
               </div>
             </div>
 
             <div className="mt-3 mb-4 text-center">
               <img src={Meta5} alt="" className="max-w-full" />
             </div>
-            <div className="flex flex-wrap justify-between gap-4 ">
+            <div className="flex flex-wrap justify-between gap-4 p-4">
               {Downloads.map((element, key) => (
                 <div className="" key={key}>
                   <div className="py-4">
@@ -133,10 +109,12 @@ const Download = () => {
                         <img
                           src={element.Img}
                           alt="Icons"
-                          className="w-full h-[4rem] max-w-full"
+                          className="w-full h-[3rem] max-w-full"
                         />
                       </div>
-                      <p className="text-black py-4">{element.OsName}</p>
+                      <p className="text-black py-4 text-sm">
+                        {element.OsName}
+                      </p>
                     </Link>
                   </div>
                 </div>

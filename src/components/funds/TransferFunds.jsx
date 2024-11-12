@@ -1,4 +1,5 @@
 import Head from "../sidebar/Head";
+import Navbar from "../sidebar/Navbar";
 import Side from "../sidebar/Side";
 
 const truncateOption = (option) => {
@@ -12,11 +13,12 @@ const TransferFunds = () => {
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4 sm:mt-4">
         <Head />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg mt-16  bg-white items-center justify-center w-full  text-center shadow-lg border border-gray-300 p-4">
-          <div className="mb-4 w-full md:w-[40%] ">
-            <div className="flex flex-col justify-center w-full mx-auto">
+        <Navbar />
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg  bg-white w-full shadow-lg border border-gray-300 p-4 ">
+          <div className="mb-4 w-full ">
+            <div className="flex flex-col justify-center lg:w-[40%] md:w-[80%] sm:w-[80%] mx-auto">
               <label className="block text-xs font-medium text-gray-700 text-left">
                 From
               </label>
@@ -57,44 +59,45 @@ const TransferFunds = () => {
                   min="0"
                   style={{ MozAppearance: "textfield", appearance: "none" }}
                 />
-                <div className="mt-4">
-                  <button className="w-full md:w-[40%] bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
-                    Submit
-                  </button>
-                </div>
+              </div>
+              <div className="mt-4">
+                <button className="w-full  bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
+                  Submit
+                </button>
               </div>
             </div>
           </div>
-        </div>
-        <div className="justify-start flex border p-4 bg-white rounded-3xl">
-          <div className="mt-4 text-xs text-gray-500">
-            <span>Please note:</span>
-            <p className="mt-2">
-              You are responsible for maintaining an account balance that will
-              not trigger a margin call. If you have any current open positions,
-              please ensure you maintain the required margin in your account.
-              Funds transferred to accounts held in the same currency are
-              processed instantly.
-            </p>
-            <p className="mt-2">
-              If transferring funds between accounts held in different
-              currencies, email{" "}
-              <a href="mailto:support@Novotrendmarkets.com">
-                support@Novotrendmarkets.com
-              </a>
-            </p>
-            <p className="mt-2">
-              Funds transferred between accounts held in the same currency are
-              processed instantly during weekdays. Transfer-between-account
-              requests submitted on weekends will only be processed after manual
-              review and if you do not hold any open positions in the account,
-              which the funds are transferred from. If you do hold open
-              position(s), please submit the transfer request during weekdays.
-            </p>
-            <p className="mt-2">
-              Please note that funds cannot be transferred between read-only
-              accounts.
-            </p>
+          <div className="justify-start flex p-4 bg-white rounded-lg">
+            <div className="mt-4 text-xs text-gray-500">
+              <span>Please note:</span>
+              <p className="mt-2">
+                You are responsible for maintaining an account balance that will
+                not trigger a margin call. If you have any current open
+                positions, please ensure you maintain the required margin in
+                your account. Funds transferred to accounts held in the same
+                currency are processed instantly.
+              </p>
+              <p className="mt-2">
+                If transferring funds between accounts held in different
+                currencies, email{" "}
+                <a href="mailto:support@Novotrendmarkets.com">
+                  support@Novotrendmarkets.com
+                </a>
+              </p>
+              <p className="mt-2">
+                Funds transferred between accounts held in the same currency are
+                processed instantly during weekdays. Transfer-between-account
+                requests submitted on weekends will only be processed after
+                manual review and if you do not hold any open positions in the
+                account, which the funds are transferred from. If you do hold
+                open position(s), please submit the transfer request during
+                weekdays.
+              </p>
+              <p className="mt-2">
+                Please note that funds cannot be transferred between read-only
+                accounts.
+              </p>
+            </div>
           </div>
         </div>
       </div>

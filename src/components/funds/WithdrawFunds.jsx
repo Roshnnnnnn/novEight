@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Side from "../sidebar/Side";
 import Head from "../sidebar/Head";
+import Navbar from "../sidebar/Navbar";
 
 const WithdrawFunds = () => {
   const [amount, setAmount] = useState(0);
@@ -26,11 +27,12 @@ const WithdrawFunds = () => {
 
   return (
     <div className="flex bg-[#F6F8F8]">
-      <Side />
-      <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
+      {/* <Side /> */}
+      <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4 sm:mt-4">
         <Head />
+        <Navbar />
         <div
-          className="mx-auto relative z-[-50] m-2 rounded-lg mt-16 flex flex-col items-center justify-center w-full p-4"
+          className="mx-auto relative z-[-50] m-2 rounded-lg  flex flex-col items-center justify-center w-full p-4 "
           style={{
             backgroundColor: "white",
             borderRadius: "20px",
@@ -61,13 +63,13 @@ const WithdrawFunds = () => {
             </p>
           </div>
 
-          <div className="flex items-center mb-2 justify-center w-full">
+          <div className="flex flex-col md:flex-row items-center mb-2 justify-center w-full">
             <input
               type="text"
               value={amount}
               onChange={handleAmountChange}
               placeholder="Enter Amount"
-              className="w-full max-w-xs p-2 text-xs md:text-sm text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
+              className="w-full max-w-xs p-2 text-xs md:text-sm text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500 mb-2 md:mb-0 md:mr-2"
               min="0"
               style={{ MozAppearance: "textfield", appearance: "none" }}
             />
@@ -79,7 +81,7 @@ const WithdrawFunds = () => {
             </span>
             <button
               onClick={handleContinue}
-              className={`w-full max-w-[140px] py-2 ml-2 text-white font-semibold rounded-md float-right ${
+              className={`w-full max-w-[140px] py-2 text-white font-semibold rounded-md ${
                 amount > 0
                   ? "bg-orange-500 hover:bg-orange-600"
                   : "bg-orange-200 cursor-not-allowed"

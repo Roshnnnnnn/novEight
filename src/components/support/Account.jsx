@@ -53,7 +53,7 @@ const Account = () => {
 
   return (
     <div className="flex bg-[#F6F8F8]">
-      <Side />
+      {/* <Side /> */}
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16">

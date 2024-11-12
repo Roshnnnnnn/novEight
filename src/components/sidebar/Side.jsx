@@ -8,14 +8,14 @@ import {
   FiDownload,
   FiGift,
   FiHelpCircle,
-  FiStar,
-} from "react-icons/fi";
-import {
   FiChevronLeft,
   FiChevronRight,
   FiChevronDown,
   FiChevronUp,
+  FiStar,
 } from "react-icons/fi";
+
+import { FaAlignRight } from "react-icons/fa";
 import logo from "../../assets/img/logo (1).png";
 
 import { Link } from "react-router-dom";
@@ -137,7 +137,7 @@ const App = () => {
           ref={sidebarRef}
           className={`${
             open ? "w-50" : "w-30"
-          } h-[100vh] p-5 relative duration-300 flex flex-col fixed top-0`}
+          } h-[100vh] p-5 relative duration-300 flex flex-col fixed top-0 hidden lg:block`}
           style={{ zIndex: "1000" }}
         >
           <div
@@ -189,7 +189,7 @@ const App = () => {
                 </div>
                 {Menu.submenu && open && (
                   <div
-                    className={`overflow-hidden transition-all duration-300 ease-in-out text-xs  ${
+                    className={`overflow-hidden transition-all duration-300 ease-in-out text-xs ${
                       openSubmenu === index ? "max-h-40" : "max-h-0"
                     }`}
                   >
@@ -197,7 +197,7 @@ const App = () => {
                       {Menu.submenu.map((subItem, subIndex) => (
                         <li
                           key={subIndex}
-                          className="flex rounded-md p-2 cursor-pointer  text-xs items-center gap-x-4"
+                          className="flex rounded-md p-2 cursor-pointer text-xs items-center gap-x-4"
                         >
                           <Link to={subItem.link || "#"}>{subItem.title}</Link>
                         </li>

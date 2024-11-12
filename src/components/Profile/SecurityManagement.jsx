@@ -13,26 +13,28 @@ const SecurityManagement = () => {
   };
 
   return (
-    <div className="p-8  shadow-md rounded-lg m-2">
+    <div className="p-4 md:p-8 shadow-md rounded-lg m-2">
       <div className="flex justify-center">
-        <div className="w-[24rem] ">
-          <h1 className="p-4">Authentication Method</h1>
-          <div className="p-2  shadow-md rounded-lg m-2 ">
-            <div className="mb-4  pb-4">
+        <div className="w-full max-w-md">
+          <h1 className="p-4 text-lg md:text-xl">Authentication Method</h1>
+          <div className="p-2  rounded-lg m-2">
+            <div className="mb-4 pb-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <span className="font-semibold text-xs">Email Address</span>
+                  <span className="font-semibold text-xs md:text-sm">
+                    Email Address
+                  </span>
                   <span
                     className="text-orange-500 ml-2"
                     style={{ fontSize: "12px" }}
                   >
                     Unverified
                   </span>
-                  <p className="text-gray-600 " style={{ fontSize: "14px" }}>
+                  <p className="text-gray-600" style={{ fontSize: "14px" }}>
                     u****@outlook.com
                   </p>
                 </div>
-                <button className=" border px-4 py-1 text-teal-900 rounded">
+                <button className="border px-4 py-1 text-teal-900 rounded">
                   Verify
                 </button>
               </div>
@@ -40,7 +42,7 @@ const SecurityManagement = () => {
               <div>
                 <div className="flex justify-between items-center">
                   <p
-                    className="text-xs text-gray-500 mt-2"
+                    className="text-xs text-gray-500 mt-2 md:text-sm"
                     style={{ fontSize: "12px" }}
                   >
                     Login Location Change Email Notification
@@ -54,7 +56,7 @@ const SecurityManagement = () => {
                         checked={isEmailToggled}
                         onChange={handleEmailToggle}
                       />
-                      <div className="relative w-7 h-4 bg-orange-300 rounded-full  dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-orange-600"></div>
+                      <div className="relative w-7 h-4 bg-orange-300 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-orange-600"></div>
                     </label>
                   </div>
                 </div>

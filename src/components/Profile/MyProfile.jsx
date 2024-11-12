@@ -8,7 +8,7 @@ const MyProfile = () => {
   return (
     <div className="">
       <div className="p-6 bg-white shadow-md rounded-lg">
-        <div className=" flex items-center">
+        <div className="flex flex-col md:flex-row items-center">
           <h2 className="text-sm font-semibold">Umang Hitendra Shah</h2>
           <p className="text-gray-600 ml-2" style={{ fontSize: "12px" }}>
             UID: 2659752
@@ -17,12 +17,12 @@ const MyProfile = () => {
         <div className="mb-4">
           <p className="text-gray-600 text-xs">Personal Account</p>
         </div>
-        <div className="grid grid-cols-2 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 mb-4 gap-4">
           <div>
             <p className="text-gray-600 mb-4">
               Email Address: u***@outlook.com
             </p>
-            <p className="text-gray-600 ">Phone Number: +971 ***735</p>
+            <p className="text-gray-600">Phone Number: +971 ***735</p>
           </div>
           <div>
             <p className="text-gray-600 mb-4">
@@ -47,7 +47,7 @@ const MyProfile = () => {
             Complete the account opening process to unlock deposit
             qualifications
           </p>
-          <div className="grid grid-cols-3 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
             <div>
               <h4 className="font-semibold my-2">Requirements</h4>
               <p className="flex items-center my-1">
@@ -86,7 +86,7 @@ const MyProfile = () => {
             <span className="text-teal-500">Completed</span>
           </div>
           <h4 className="font-semibold">Level 2. ID Verification</h4>
-          <div className="grid grid-cols-3 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
             <div>
               <h4 className="font-semibold my-2">Requirements</h4>
               <p className="flex items-center my-1">
@@ -102,7 +102,6 @@ const MyProfile = () => {
                 ID Photo
               </p>
             </div>
-
             <div>
               <h4 className="font-semibold my-2">Permissions</h4>
               <p className="flex items-center my-1">
@@ -120,7 +119,7 @@ const MyProfile = () => {
             <span className="text-teal-900">Unverified</span>
           </div>
           <h4 className="font-semibold">Level 3. Address Verification</h4>
-          <div className="grid grid-cols-3 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
             <div>
               <h4 className="font-semibold my-2">Requirements</h4>
               <p className="flex items-center my-1">
