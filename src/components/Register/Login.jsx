@@ -26,10 +26,10 @@
 //               </div>
 //             </div>
 //             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-//               Vantage | Trading, Redefined.
+//               Novotrend | Trading, Redefined.
 //             </h1>
 //             <p className="mt-4 text-lg md:text-xl">
-//               Login to your Vantage Client Portal for Seamless Trading
+//               Login to your Novotrend Client Portal for Seamless Trading
 //               Experiences
 //             </p>
 //           </div>
@@ -183,10 +183,10 @@ const Login = () => {
               </div>
             </div>
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
-              Vantage | Trading, Redefined.
+              Novotrend | Trading, Redefined.
             </h1>
             <p className="mt-4 text-lg md:text-xl">
-              Login to your Vantage Client Portal for Seamless Trading
+              Login to your Novotrend Client Portal for Seamless Trading
               Experiences
             </p>
           </div>
