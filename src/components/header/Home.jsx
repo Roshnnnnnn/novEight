@@ -8,7 +8,7 @@ import background from "../../assets/img/logo.png";
 // import StockData from "../stockData/StockData";
 import StockData from "./StockData";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Side from "../sidebar/Side";
 import Promotion from "../../assets/img/Promotion.png";
 import Account from "../../assets/img/Account.png";
@@ -29,29 +29,63 @@ import { IoWalletOutline, IoArrowForward, IoArrowBack } from "react-icons/io5";
 import Head from "../sidebar/Head";
 import { Link } from "react-router-dom";
 import Navbar from "../sidebar/Navbar";
+import axios from "axios";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const LIVE_ACCOUNT_LIST = `${API_BASE_URL}/open_live_account_list.php`;
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [selectedCountry, setSelectedCountry] = useState("US");
   const [activeButton, setActiveButton] = useState(null);
+  const [accounts, setAccounts] = useState([]);
+  const [bal, setBal] = useState([]);
+
+  const token = localStorage.getItem("userToken");
+
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        const response = await axios.post(LIVE_ACCOUNT_LIST, { token });
+        // console.log(response);
+        if (response.data.data.status === 200) {
+          const accountsData = response.data.data.response;
+          if (Array.isArray(accountsData)) {
+            setAccounts(accountsData);
+            const balanceData = accountsData.map((account) => ({
+              balance: account.balance,
+            }));
+            setBal(balanceData);
+          } else {
+            console.log("No accounts found.");
+          }
+        }
+      } catch (error) {
+        console.log("Error fetching accounts:", error);
+      }
+    };
+
+    fetchAccount();
+  }, [token]);
+  console.log(bal);
 
   // Update carousel settings to show only one item
-  const carouselSettings = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 2, // Show 1 item on desktop
-      partialVisibilityGutter: 30,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1, // Show 1 item on tablet
-    },
-    mobile: {
-      breakpoint: { max: 204, min: 0 },
-      items: 1, // Show 1 item on mobile
-    },
-  };
+  // const carouselSettings = {
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 2, // Show 1 item on desktop
+  //     partialVisibilityGutter: 30,
+  //   },
+  //   tablet: {
+  //     breakpoint: { max: 1024, min: 464 },
+  //     items: 1, // Show 1 item on tablet
+  //   },
+  //   mobile: {
+  //     breakpoint: { max: 204, min: 0 },
+  //     items: 1, // Show 1 item on mobile
+  //   },
+  // };
 
   const countryFlags = {
     US: US,
@@ -64,6 +98,21 @@ const Home = () => {
     JP: JP,
     CN: CN,
   };
+
+  // const accounts = [
+  //   {
+  //     id: "51602550",
+  //     type: "MT5",
+  //     balance: "0.00 USD",
+  //     description: "Standard STP",
+  //   },
+  //   {
+  //     id: "51602558",
+  //     type: "MT5",
+  //     balance: "0.00 USD",
+  //     description: "Standard STP",
+  //   },
+  // ];
 
   const FlagComponent = countryFlags[selectedCountry];
 
@@ -110,7 +159,7 @@ const Home = () => {
                       <FlagComponent title={selectedCountry} />
                     </span>
                     <span className="text-sm sm:text-base md:text-lg lg:text-lg font-semibold">
-                      {isVisible ? "0.00" : "****"}
+                      {isVisible ? bal[0]?.balance : "****"}
                     </span>
 
                     <select
@@ -239,7 +288,7 @@ const Home = () => {
                           <FlagComponent title={selectedCountry} />
                         </span>
                         <span className="text-sm sm:text-base md:text-lg lg:text-lg font-semibold">
-                          {isVisible ? "0.00" : "****"}
+                          {isVisible ? bal[0]?.balance : "****"}
                         </span>
 
                         <select
@@ -314,8 +363,12 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="flex-1 h-auto">
-                  <div className="text-gray-800 flex justify-center">
-                    <div className="bg-[#F6F8F8] rounded-lg shadow-md p-3 border border-gray-200 hover:shadow-lg transition-all duration-300 relative w-full h-auto mx-auto">
+                  <div
+                    className={`text-gray-800 flex justify-center ${
+                      accounts.length === 1 ? "items-center" : ""
+                    }`}
+                  >
+                    <div className="bg-[#F6F8F8] rounded-lg shadow-md p-3 border border-gray-200 hover:shadow-lg transition-all duration-300 relative w-full h-[7rem] mx-auto">
                       <img
                         src={background}
                         alt="Image"
@@ -325,39 +378,44 @@ const Home = () => {
                         Trading Account
                       </div>
                       <div className="flex flex-col mt-2 space-y-3">
-                        {/* First Account */}
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-                          <div className="flex items-center gap-2 sm:gap-4">
-                            <span className="text-xs sm:text-xs">MT5</span>
-                            <span className="text-xs sm:text-xs">51602557</span>
-                            <span className="text-xs sm:text-xs font-semibold">
-                              0.00 USD
-                            </span>
+                        {accounts.slice(0, 2).map((account, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0"
+                          >
+                            <div className="flex items-center gap-2 sm:gap-4">
+                              <span className="text-xs sm:text-xs">
+                                {account.account_type}
+                              </span>
+                              <span className="text-xs sm:text-xs">
+                                {account.accno}
+                              </span>
+                              <span className="text-xs sm:text-xs font-semibold">
+                                {account.balance} USD
+                              </span>
+                            </div>
+                            <div className="">
+                              <span className="text-xs sm:text-xs pr-6">
+                                Leverages:
+                                {account.leverages}
+                              </span>
+                            </div>
                           </div>
-                          <div className="">
-                            <span className="text-xs sm:text-xs ">
-                              Standard STP
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Second Account */}
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-                          <div className="flex items-center gap-2 sm:gap-4">
-                            <span className="text-xs sm:text-xs">MT5</span>
-                            <span className="text-xs sm:text-xs">51602557</span>
-                            <span className="text-xs sm:text-xs font-semibold">
-                              0.00 USD
-                            </span>
-                          </div>
-                          <div className="">
-                            <span className="text-xs sm:text-xs ">
-                              Standard STP
-                            </span>
-                          </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
+                    {accounts.length > 2 && (
+                      <button className="text-orange-500 text-xs absolute right-0 mt-2 mr-10">
+                        <Link to={"/accountManagement"}>More</Link>
+                      </button>
+                    )}
+                    {accounts.length === 1 && (
+                      <Link to={"/accountManagement"}>
+                        <button className="text-orange-500 mt-2 text-xs">
+                          Create Account
+                        </button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import gpay from "../../assets/img/gpay.png";
+import Navbar from "../sidebar/Navbar";
 
 const AppleGooglePay = () => {
   return (
@@ -8,6 +9,7 @@ const AppleGooglePay = () => {
       <Side />
       <div className="w-[60%] mx-auto relative z-10 m-2 rounded mt-16">
         <Head />
+        <Navbar />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50]">
           <div className="bg-white shadow-lg p-8 rounded-xl">
             <h1 className="text-xl font-bold mb-4">Apple Pay/Google Pay</h1>

@@ -1,5 +1,7 @@
 import visa from "../../assets/img/visa.png";
 import bitcoin from "../../assets/img/bitcoin.png";
+import Bank from "../../assets/img/Bank.png";
+import Cash from "../../assets/img/Cash.png";
 import apple from "../../assets/img/apple.png";
 import stic from "../../assets/img/stucpay.png";
 import bit from "../../assets/img/bitwit.png";
@@ -15,6 +17,48 @@ import Navbar from "../sidebar/Navbar";
 const Deposits = () => {
   const paymentMethods = [
     {
+      title: "Cryptocurrency Deposit",
+      fee: "$0 FEE",
+      timing: "Instant",
+      link: "/cps/Cryptocurrency",
+      icon: (
+        <img
+          src={bitcoin}
+          alt="Cryptocurrency"
+          style={{ width: "50px", height: "auto" }}
+        />
+      ),
+      promotion: true,
+    },
+    {
+      title: "Bank Deposit",
+      fee: "$0 FEE",
+      timing: "3 Working Days",
+      link: "/bank",
+      icon: (
+        <img
+          src={Bank}
+          alt="Cryptocurrency"
+          style={{ width: "50px", height: "auto" }}
+        />
+      ),
+      promotion: true,
+    },
+    {
+      title: "Cash Deposit",
+      fee: "$0 FEE",
+      timing: "3 Working Days",
+      link: "/cash",
+      icon: (
+        <img
+          src={Cash}
+          alt="Cryptocurrency"
+          style={{ width: "50px", height: "auto" }}
+        />
+      ),
+      promotion: true,
+    },
+    {
       title: "Credit/Debit Card",
       fee: "$0 FEE",
       timing: "24/7 INSTANT",
@@ -26,20 +70,6 @@ const Deposits = () => {
           style={{ width: "150px", height: "auto" }}
         />
       ),
-    },
-    {
-      title: "Cryptocurrency Deposit",
-      fee: "$0 FEE",
-      timing: "1 Hour",
-      link: "/cps/Cryptocurrency",
-      icon: (
-        <img
-          src={bitcoin}
-          alt="Cryptocurrency"
-          style={{ width: "50px", height: "auto" }}
-        />
-      ),
-      promotion: true,
     },
     {
       title: "Apple Pay/Google Pay",
@@ -140,12 +170,12 @@ const Deposits = () => {
       <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
         <Navbar />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg cursor-pointer">
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 z-[50] lg:w-full md:w-[18rem]">
+        <div className="mx-auto relative m-2 rounded-lg cursor-pointer lg:mt-16 md:mt-10 sm:mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8 z-[50] lg:w-full md:w-[18rem]">
             {paymentMethods.map((method, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all z-[-50] duration-300 cursor-pointer"
+                className="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 {method.link ? (
                   <Link to={method.link}>

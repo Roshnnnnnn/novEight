@@ -154,3 +154,15 @@
 .select:has(.options input[type="radio"]#option-3:checked) .selected::before {
   content: attr(data-three);
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

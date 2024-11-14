@@ -1,6 +1,12 @@
+import { useEffect, useState } from "react";
 import Head from "../sidebar/Head";
 import Navbar from "../sidebar/Navbar";
 import Side from "../sidebar/Side";
+import axios from "axios";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const ACCOUNT_LIST = `${API_BASE_URL}/mt5_accounts_list.php`;
+const TRANSFER = `${API_BASE_URL}/mt5_to_mt5_tranfer_api.php`;
 
 const truncateOption = (option) => {
   const words = option.split(" ");
@@ -10,6 +16,75 @@ const truncateOption = (option) => {
 };
 
 const TransferFunds = () => {
+  const [accounts, setAccounts] = useState([]);
+  const [fromAccount, setFromAccount] = useState("");
+  const [toAccount, setToAccount] = useState("");
+  const [amount, setAmount] = useState("");
+  const [note, setNote] = useState("");
+  const [error, setError] = useState("");
+  const token = localStorage.getItem("userToken");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(ACCOUNT_LIST, { token });
+        setAccounts(response.data.data.response || []);
+      } catch (err) {
+        console.error("Failed to fetch accounts", err);
+        setError("Failed to load accounts");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!fromAccount || !toAccount || !amount || !note) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    if (fromAccount === toAccount) {
+      setError("Cannot transfer to the same account");
+      return;
+    }
+
+    if (parseFloat(amount) <= 0) {
+      setError("Amount must be greater than 0");
+      return;
+    }
+
+    const formData = {
+      senderid: fromAccount,
+      receiverid: toAccount,
+      amount,
+      note,
+      token,
+    };
+
+    try {
+      const response = await axios.post(TRANSFER, formData);
+      console.log(response);
+      if (response.data.status === "success") {
+        // Handle success (e.g., show a success message, reset form, etc.)
+        console.log("Transfer successful");
+        // Reset form fields
+        setFromAccount("");
+        setToAccount("");
+        setAmount("");
+        setNote("");
+      } else {
+        setError(response.data.message || "Transfer failed");
+      }
+    } catch (err) {
+      console.error("Submission error", err);
+      setError("An error occurred during the transfer");
+    }
+  };
+
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
@@ -22,28 +97,48 @@ const TransferFunds = () => {
               <label className="block text-xs font-medium text-gray-700 text-left">
                 From
               </label>
-              <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
-                <option>
-                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
-                </option>
-                <option>
-                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
-                </option>
-                <option>
-                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
-                </option>
-                {/* Add more options as needed */}
+              <select
+                name="mt5accountselectfrom"
+                id="mt5accountselectfrom"
+                value={fromAccount}
+                onChange={(e) => setFromAccount(e.target.value)}
+                className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10"
+              >
+                <option value="">Select Account</option>
+                {accounts && accounts.length > 0 ? (
+                  accounts.map((account) => (
+                    <option key={account.id} value={account.id}>
+                      {account.id}
+                    </option>
+                  ))
+                ) : (
+                  <option value="">No accounts available</option>
+                )}
               </select>
 
               <div className="mb-4 w-full">
                 <label className="block text-xs font-medium text-gray-700 text-left">
                   To
                 </label>
-                <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
-                  <option>516278838 - $0.00 USD - Hedge STP</option>
-                  <option>516278838 - $0.00 USD - Hedge STP</option>
-                  <option>516278838 - $0.00 USD - Hedge STP</option>
-                  {/* Add more options as needed */}
+                <select
+                  value={toAccount}
+                  onChange={(e) => setToAccount(e.target.value)}
+                  name="mt5accountselect"
+                  id="mt5accountselect"
+                  className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10"
+                >
+                  <option value="">Select Account</option>
+                  {accounts && accounts.length > 0 ? (
+                    accounts
+                      .filter((account) => account.id !== fromAccount)
+                      .map((account) => (
+                        <option key={account.id} value={account.id}>
+                          {account.id}
+                        </option>
+                      ))
+                  ) : (
+                    <option value="">No accounts available</option>
+                  )}
                 </select>
               </div>
               <div className="mb-4 w-full">
@@ -51,9 +146,29 @@ const TransferFunds = () => {
                   Amount
                 </label>
                 <input
+                  type="number"
+                  id="amount"
+                  name="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
+                  placeholder="Enter Amount"
+                  className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
+                  min="0"
+                  style={{ MozAppearance: "textfield", appearance: "none" }}
+                />
+              </div>
+              <div className="mb-4 w-full">
+                <label className="block text-xs font-medium text-gray-700 text-left">
+                  Note
+                </label>
+                <input
                   type="text"
-                  // value={amount}
-                  // onChange={handleAmountChange}
+                  id="note"
+                  name="note"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  required
                   placeholder="Enter Amount"
                   className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
                   min="0"
@@ -61,7 +176,10 @@ const TransferFunds = () => {
                 />
               </div>
               <div className="mt-4">
-                <button className="w-full  bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
+                <button
+                  onClick={handleSubmit}
+                  className="w-full  bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg"
+                >
                   Submit
                 </button>
               </div>

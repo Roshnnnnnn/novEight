@@ -1,16 +1,10 @@
-import { useState } from "react";
 import { FaPhone, FaEnvelope, FaComments } from "react-icons/fa";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import Navbar from "../sidebar/Navbar";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
-  const [selectedForm, setSelectedForm] = useState("");
-
-  const handleFormChange = (event) => {
-    setSelectedForm(event.target.value);
-  };
-
   return (
     <div className="flex bg-[#F6F8F8]">
       <Side />
@@ -34,32 +28,17 @@ const Contact = () => {
             <p className="text-xs mb-2 md:mb-0">
               <FaEnvelope className="inline mr-1" />
               <a
-                href="mailto:support@Novotrendmarkets.com"
+                href="mailto:support@novotrend.co"
                 className="text-blue-500 underline"
               >
-                support@Novotrendmarkets.com
+                support@novotrend.co
               </a>
             </p>
             <p className="text-xs mb-2 md:mb-0">
-              <FaComments className="inline mr-1" /> Live Chat
+              <Link to={"/ticket"}>
+                <FaComments className="inline mr-1" /> Live Chat
+              </Link>
             </p>
-
-            <select
-              id="support-forms"
-              value={selectedForm}
-              className="text-xs rounded-md mt-2 md:mt-0 col-span-4 p-2 pl-2 focus:outline-none"
-              onChange={handleFormChange}
-            >
-              <option disabled value="">
-                Help & Support Forms
-              </option>
-              <option value="partnership">Partnership Transfer Form</option>
-              <option value="trade">Novotrend Trade Investigation Form</option>
-              <option value="opt-out">
-                Opt Out of Novotrend Promotions Form
-              </option>
-              <option value="closure">Account Closure Request Form</option>
-            </select>
           </div>
         </div>
       </div>

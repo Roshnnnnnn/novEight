@@ -67,7 +67,7 @@ const ProfilePage = () => {
 
   return (
     <div className="flex bg-[#F6F8F8]">
-      {/* <Side /> */}
+      <Side />
       <div className="lg:w-[60%] md:w-[90%] mx-auto relative z-10 rounded lg:mt-16 md:mt-4">
         <Head />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50] bg-white">

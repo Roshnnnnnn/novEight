@@ -94,12 +94,12 @@ const Head = () => {
               <div className="pl-2" style={{ fontSize: "12px" }}>
                 UID: 2659752
               </div>
-              <div
+              {/* <div
                 className="p-2 cursor-pointer flex items-center leading-6"
                 onClick={handleProfile}
               >
                 <GiPlagueDoctorProfile className="mr-2" /> Profile
-              </div>
+              </div> */}
               <div
                 className="p-2 cursor-pointer flex items-center"
                 onClick={handleDownload}

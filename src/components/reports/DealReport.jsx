@@ -2,8 +2,13 @@ import { useState } from "react";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import Navbar from "../sidebar/Navbar";
+import axios from "axios";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const URL = `${API_BASE_URL}/all_get_deal_report_history_filter.php`;
 
 const DealReport = () => {
+  const token = localStorage.getItem("userToken");
   const [fdate, setFdate] = useState("");
   const [edate, setEdate] = useState("");
   const [transactionType, setTransactionType] = useState("All");
@@ -16,30 +21,39 @@ const DealReport = () => {
 
   const today = new Date().toISOString().split("T")[0];
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!fdate || !edate) {
-      setValidationError("Please select both 'From' and 'To' dates.");
+      setValidationError("Please select both start and end dates.");
       return;
     }
 
-    setValidationError("");
+    if (new Date(fdate) > new Date(edate)) {
+      setValidationError("End date must be after the start date.");
+      return;
+    }
 
+    const requestData = {
+      token,
+      fdate,
+      edate,
+    };
+
+    const response = await axios.post(URL, requestData);
+    console.log(response);
+
+    setValidationError("");
+    setIsFiltered(true);
     setLoading(true);
 
     setTimeout(() => {
       setLoading(false);
-      setIsFiltered(true);
     }, 1000);
   };
 
   const handleReset = () => {
     setFdate("");
     setEdate("");
-    setTransactionType("All");
-    setTransactionStatus("All");
     setIsFiltered(false);
-    setValidationError("");
-    setError("");
   };
 
   return (
@@ -167,26 +181,7 @@ const DealReport = () => {
                     <th className="border text-xs">Remark</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      Invalid Date
-                    </td>
-                    <td className="px-4 py-4 text-xs text-gray-500">1000.00</td>
-                    <td className="px-4 py-4 text-xs text-gray-500">cash</td>
-                    <td className="px-4 py-4 text-xs text-gray-500">Receipt</td>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      kr diya na
-                    </td>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      Approved
-                    </td>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      kr diya na
-                    </td>
-                  </tr>
-                  {/* Add more rows as needed */}
-                </tbody>
+                <tbody className="bg-white divide-y divide-gray-200"></tbody>
               </table>
             </div>
           </div>

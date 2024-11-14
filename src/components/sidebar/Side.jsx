@@ -137,7 +137,7 @@ const App = () => {
           ref={sidebarRef}
           className={`${
             open ? "w-50" : "w-30"
-          } h-[100vh] p-5 relative duration-300 flex flex-col fixed top-0 hidden lg:block`}
+          } h-[100vh] p-5 relative duration-300 flex flex-col fixed top-0 hidden md:block`}
           style={{ zIndex: "1000" }}
         >
           <div

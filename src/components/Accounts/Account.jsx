@@ -1,83 +1,116 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GB as GBFlag } from "country-flag-icons/react/3x2";
 import Side from "../sidebar/Side";
 import Head from "../sidebar/Head";
-import { US as USFlag } from "country-flag-icons/react/3x2";
-import { EU as EUFlag } from "country-flag-icons/react/3x2";
-import Swap from "../../assets/img/swap.png";
-import swapfree from "../../assets/img/swapstandard.png";
-import standard from "../../assets/img/standard.png";
-import raw from "../../assets/img/raw.png";
-import trading from "../../assets/img/trading.png";
-import pamm from "../../assets/img/pamm.png";
-import perpetual from "../../assets/img/perpetual.png";
 import { Link } from "react-router-dom";
-import Phone from "../../assets/img/download_phone.webp";
 import Navbar from "../sidebar/Navbar";
+import axios from "axios";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const LIVE_ACCOUNT_LIST = `${API_BASE_URL}/open_live_account_list.php`;
+const OPEN_LIVE_ACCOUNT = `${API_BASE_URL}/open_live_account_add.php`;
+const LIST = `${API_BASE_URL}/list_group.php`;
 
 const Account = () => {
-  const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
+  // State variables
   const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [activeAccount, setActiveAccount] = useState("live");
+  const [activeAccount, setActiveAccount] = useState("");
   const [accountType, setAccountType] = useState("");
-  const [activeLeverage, setActiveLeverage] = useState("100 : 1");
-  const [selectedCurrency, setSelectedCurrency] = useState("");
+  const [accountList, setAccountList] = useState(null);
+  const [activeLeverage, setActiveLeverage] = useState("");
+  const [account, setAccounts] = useState([]);
+  const token = localStorage.getItem("userToken");
+  const [formData, setFormData] = useState({
+    groupname: "",
+    leverage: "",
+    mainpassword: "",
+    investorpassword: "",
+    groupid: "",
+  });
 
-  const openAccountModal = () => setIsAccountModalOpen(true);
-  const closeAccountModal = () => setIsAccountModalOpen(false);
+  // Function to fetch accounts
+  const fetchAccounts = async () => {
+    try {
+      const response = await axios.post(LIVE_ACCOUNT_LIST, { token });
+      if (response.data.data.status === 200) {
+        const accountsData = response.data.data.response;
+        setAccounts(Array.isArray(accountsData) ? accountsData : []);
+      } else {
+        console.log("No accounts found.");
+      }
+    } catch (error) {
+      console.error("Error fetching accounts:", error);
+    }
+  };
+
+  // Function to fetch account types
+  const fetchAccountTypes = async () => {
+    try {
+      const response = await axios.post(LIST, { token });
+      if (response.data.data.status === 200) {
+        setAccountList(response.data.data.response);
+      }
+    } catch (error) {
+      console.error("Error fetching account types:", error);
+    }
+  };
+
+  // useEffect hooks for fetching data
+  useEffect(() => {
+    fetchAccounts();
+    fetchAccountTypes();
+  }, [token]);
+
+  // Function to handle account type change
+  const handleAccountTypeChange = (e) => {
+    setAccountType(e.target.value);
+  };
+
+  // Function to open a new account
+  const handleOpenNewAccount = async () => {
+    const selectedGroupId = accountList.find(
+      (item) => item.groupname === activeAccount
+    )?.groupid;
+
+    const requestData = {
+      selectgroup: selectedGroupId,
+      accleverage: formData.leverage,
+      mainpassword: formData.mainpassword,
+      investorpassword: formData.investorpassword,
+      token,
+    };
+
+    try {
+      const response = await axios.post(OPEN_LIVE_ACCOUNT, requestData);
+      if (response.data.data.status === 200) {
+        await fetchAccounts(); // Refresh account list
+      } else {
+        console.error("Invalid group selected: " + response.data.data.message);
+      }
+    } catch (error) {
+      console.error("Error opening new account:", error);
+    } finally {
+      // Reset form data
+      setFormData({
+        groupname: "",
+        leverage: "",
+        mainpassword: "",
+        investorpassword: "",
+        groupid: "",
+      });
+      setActiveAccount("");
+      setActiveLeverage("");
+      closeModal();
+    }
+  };
 
   const openTradeModal = () => setIsTradeModalOpen(true);
   const closeTradeModal = () => setIsTradeModalOpen(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  const accounts = [
-    {
-      id: "51602557",
-      type: "MT5",
-      status: "Active",
-      balance: 0.0,
-      credits: 0.0,
-      currency: "USD",
-      leverage: "500:1",
-      server: "Standard STP",
-      platform: "NovotrendInternational-Live 4",
-    },
-    {
-      id: "51627838",
-      type: "MT5",
-      status: "Active",
-      balance: 0.0,
-      credits: 0.0,
-      currency: "USD",
-      leverage: "500:1",
-      server: "Standard STP",
-      platform: "NovotrendInternational-Live 4",
-    },
-    {
-      id: "1461486",
-      type: "CT",
-      status: "Inactive",
-      balance: "-",
-      credits: "-",
-      server: "Standard STP",
-      platform: "NovotrendInternational-Live",
-    },
-  ];
-
-  // Function to handle clicks outside the modal
-  const handleOverlayClick = (e) => {
-    if (e.target.className.includes("overlay")) {
-      closeModal();
-    }
-  };
-
-  const handleAccountTypeChange = (e) => {
-    setAccountType(e.target.value);
-  };
 
   return (
     <div className="flex bg-[#F6F8F8]">
@@ -86,10 +119,9 @@ const Account = () => {
         <Head />
         <Navbar />
         <div className="mx-auto relative z-[-50] m-2 rounded-lg  md:mt-4 h-[80vh]">
-          {/* Top Navigation - Made Responsive */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 mb-4">
+          <div className="flex justify-between gap-4 mb-4">
             <select
-              className="border rounded-md px-4 py-1 text-xs bg-white shadow-md w-full"
+              className="border rounded-md px-4 py-1 text-xs bg-white shadow-md"
               id="accountTypeSelector"
               onChange={handleAccountTypeChange}
             >
@@ -97,27 +129,6 @@ const Account = () => {
               <option>Demo Account</option>
             </select>
 
-            <select
-              className="border rounded-md px-4 py-1 text-xs bg-white shadow-md w-full"
-              id="statusSelector"
-            >
-              <option>All</option>
-              <option>Active</option>
-              <option>Rejected</option>
-              <option>Processing</option>
-              <option>Pending</option>
-              <option>Inactive</option>
-            </select>
-            <select
-              className="border rounded-md px-4 py-2 text-xs bg-white shadow-md w-full"
-              id="platformSelector"
-            >
-              <option disabled>Trading Platforms</option>
-              <option>All</option>
-              <option>MT4</option>
-              <option>MT5</option>
-              <option>Copy Trading</option>
-            </select>
             <div className="flex gap-4 w-full sm:w-auto justify-end text-xs mt-2 sm:mt-0">
               <button
                 onClick={openModal}
@@ -126,15 +137,10 @@ const Account = () => {
                 <span className="mr-2">+</span>
                 Open Account
               </button>
-              <button className="p-2 border rounded-md">
-                <span>⋮</span>
-              </button>
             </div>
           </div>
-
-          {/* Account Cards - Adjusted size and spacing */}
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-x-4 text-xs gap-y-2 justify-center items-center">
-            {accounts.map((account) => (
+            {account.map((account) => (
               <div
                 key={account.id}
                 className="border my-1 p-4 rounded-lg p-2 bg-white w-full"
@@ -154,33 +160,40 @@ const Account = () => {
                         : "bg-gray-100 text-gray-600"
                     }`}
                   >
-                    {account.status}
+                    {account.account_type}
                   </span>
                 </div>
 
-                {/* Balance Display - Updated with country flag */}
                 <div className="flex items-center mb-1">
                   <GBFlag className="w-3 h-3 mr-1" />
-                  <span className="text-xs font-medium">{account.balance}</span>
+                  <span className="text-xs font-medium">
+                    {account.balance} USD
+                  </span>
                   <span className="ml-1 text-xs text-gray-500">
                     {account.currency}
                   </span>
                 </div>
 
-                {/* Credits & Balance - Moved below other elements */}
                 <div className=" gap-2 mb-1 text-xs my-2 ">
                   <div className="flex items-center">
                     <span className="text-gray-500 font-bold text-xs">
-                      Credits:{" "}
+                      Account:{" "}
                     </span>
-                    <span className="font-bold text-xs">{account.credits}</span>
-                    <span className="ml-1 text-red-500 text-xs">!</span>
+                    <span className=" text-xs">{account.accno}</span>
+                    <span className="mx-1 text-red-500 text-xs">|</span>
                     <span className="text-gray-500 text-xs">Balance: </span>
-                    <span className="text-xs">{account.balance}</span>
+                    <span className="text-xs">{account.balance} USD</span>
                   </div>
                 </div>
-                {/* Adjusted position of the button section */}
-                <div className=" flex flex-col md:flex-row sm:flex-row  justify-end text-gray-600">
+
+                <div className=" flex flex-col md:flex-row sm:flex-row justify-between text-gray-600 gap-x-2">
+                  <div
+                    className="flex flex-wrap gap-1 my-2 text-xs text-gray-500 mb-1"
+                    style={{ fontSize: "12px" }}
+                  >
+                    Leverages:{" "}
+                    {account.leverages && <span>{account.leverages}</span>}
+                  </div>
                   <div className="gap-2">
                     <button className="px-2 py-1 border rounded text-xs hover:bg-gray-200 w-full sm:w-auto mb-2">
                       <Link to={"/depositFunds"}>Deposit</Link>
@@ -191,196 +204,124 @@ const Account = () => {
                     >
                       Trade
                     </button>
-                    <button className="p-1 border rounded hover:bg-gray-200 w-full sm:w-auto">
-                      ⚙️
-                    </button>
-                  </div>
-                </div>
-                <div className="flex">
-                  {/* Account Details */}
-                  <div
-                    className="flex flex-wrap gap-1 my-2 text-xs text-gray-500 mb-1"
-                    style={{ fontSize: "12px" }}
-                  >
-                    {account.leverage && <span>{account.leverage}</span>}
-                    {account.server && <span>• {account.server}</span>}
-                    {account.platform && <span>• {account.platform}</span>}
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Trade Modal */}
           {isTradeModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center overlay bg-black bg-opacity-50">
               <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-[40rem] sm:w-[35rem] max-h-[80vh] overflow-hidden hide-scrollbar">
-                <h2 className="text-lg font-semibold mb-4">Trade</h2>
-                {/* Add your trade content here */}
+                <h2 className="text-lg font-semibold mb-4">Download APP</h2>
+                <p className="text-sm mb-4">Start The Copy Trading Journey</p>
+                <ul className="list-disc list-inside mb-4">
+                  <li>Select the ideal strategy</li>
+                  <li>Allocate money and start copying</li>
+                  <li>Rest assured and check the investment performance</li>
+                </ul>
+                <div className="flex justify-around mb-4">
+                  <button className="border rounded p-2 w-full text-xs">
+                    Download On The App Store
+                  </button>
+                  <button className="border rounded p-2 w-full text-xs">
+                    Get It On Google Play
+                  </button>
+                  <button className="border rounded p-2 w-full text-xs">
+                    Download On The Android
+                  </button>
+                </div>
+                <div className="flex justify-center">
+                  <img
+                    src="path/to/qr-code.png"
+                    alt="QR Code"
+                    className="w-24 h-24"
+                  />
+                </div>
                 <button
                   onClick={closeTradeModal}
-                  className="border rounded p-2 w-full text-xs"
+                  className="border rounded p-2 w-full text-xs mt-4"
                 >
                   Close
                 </button>
               </div>
             </div>
           )}
-
-          {/* Account Modal */}
-          {isAccountModalOpen && (
-            <div
-              className="fixed inset-0 flex items-center justify-center overlay bg-black bg-opacity-50"
-              onClick={closeAccountModal}
-            >
-              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-[40rem] sm:w-[35rem] max-h-[80vh] overflow-hidden hide-scrollbar">
-                <h2 className="text-lg font-semibold mb-4">Open Account</h2>
-
-                <button
-                  onClick={closeAccountModal}
-                  className="border rounded p-2 w-full text-xs"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Modal */}
           {isModalOpen && (
-            <div
-              className="fixed inset-0 flex items-center justify-center overlay bg-black bg-opacity-50"
-              onClick={handleOverlayClick}
-            >
+            <div className="fixed inset-0 flex items-center justify-center overlay bg-black bg-opacity-50">
               <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-[40rem] sm:w-[35rem] max-h-[80vh] overflow-hidden hide-scrollbar">
                 <h2 className="text-lg pl-4 font-semibold mb-4 sticky top-0 bg-white z-10">
                   Open Account
                 </h2>
                 <div className="overflow-y-auto p-4 max-h-[70vh] hide-scrollbar">
-                  {/* Form Elements */}
                   <div className="flex justify-between mb-4 text-xs gap-x-4">
-                    <button
-                      className={`border rounded p-2 w-full text-center ${
-                        activeAccount === "live"
-                          ? "bg-orange-500 text-white"
-                          : "bg-white text-orange-500"
-                      }`}
-                      onClick={() => setActiveAccount("live")}
-                    >
-                      Live Account
-                    </button>
-                    <button
-                      className={`border rounded p-2 w-full text-center ${
-                        activeAccount === "demo"
-                          ? "bg-orange-500 text-white"
-                          : "bg-white text-orange-500"
-                      }`}
-                      onClick={() => setActiveAccount("demo")}
-                    >
-                      Demo Account
-                    </button>
+                    {accountList.map((item, index) => (
+                      <button
+                        key={index}
+                        className={`border rounded p-2 w-full text-center ${
+                          activeAccount === item.groupname
+                            ? "bg-orange-500 text-white"
+                            : "bg-white text-orange-500"
+                        }`}
+                        onClick={() => {
+                          setActiveAccount(item.groupname);
+                        }}
+                      >
+                        {item.groupname}
+                      </button>
+                    ))}
                   </div>
-                  <form>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleOpenNewAccount();
+                    }}
+                  >
+                    <label className="block mb-1 text-xs">Main Password</label>
+                    <input
+                      type="password"
+                      placeholder="Enter Main Password"
+                      className="border-2 pl-4 rounded-md w-full mb-2 text-xs h-10 focus:outline-none"
+                      value={formData.mainpassword}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          mainpassword: e.target.value,
+                        })
+                      }
+                      required
+                    />
+
                     <label className="block mb-1 text-xs">
-                      Choose A Trading Platform
+                      Investor Password
                     </label>
-                    <select className="border pl-4 rounded-md w-full mb-2 text-xs h-10">
-                      <option className="pl-4 py-2">
-                        Recommended-MetaTrader 5
-                      </option>
-                      <option className="pl-4 py-2">
-                        Recommended-MetaTrader 5
-                      </option>
-                      <option className="pl-4 py-2">
-                        Recommended-MetaTrader 5
-                      </option>
-                      <option className="pl-4 py-2">
-                        Recommended-MetaTrader 5
-                      </option>
-                      {/* Other options... */}
-                    </select>
-                    <label className="block mb-1 text-xs">
-                      Choose An Account Type
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-2">
-                      {[
-                        { name: "Standard", img: standard },
-                        { name: "RAW", img: raw },
-                        { name: "SWAP-FREE", img: swapfree },
-                        { name: "TradingView", img: trading },
-                        { name: "PAMM", img: pamm },
-                        { name: "Perpetual", img: perpetual },
-                        { name: "Swap", img: Swap },
-                      ].map(({ name, img }) => (
-                        <button
-                          key={name}
-                          type="button"
-                          className={`rounded border  w-full text-xs font-semibold flex items-center justify-center ${
-                            accountType === name
-                              ? "bg-[#FCEEE9] text-[#FCEEE9] border border-orange-500"
-                              : "bg-white text-[#2C3E50] border border-[#FCEEE9]"
-                          }`}
-                          onClick={() => {
-                            setAccountType(name);
-                          }}
-                        >
-                          <img
-                            src={img}
-                            alt={name}
-                            className="h-10 w-[7rem] object-contain "
-                          />
-                        </button>
-                      ))}
-                    </div>
-                    <label className="block mb-1 text-xs">
-                      Choose An Account Currency
-                    </label>
-                    <div className="flex gap-2 mb-2">
-                      <button
-                        type="button"
-                        className={`border rounded p-2 w-full text-xs flex items-center ${
-                          selectedCurrency === "USD"
-                            ? "border-orange-500 bg-orange-50"
-                            : ""
-                        }`}
-                        onClick={() => setSelectedCurrency("USD")}
-                      >
-                        <USFlag className="w-4 h-4 mr-1" /> USD
-                      </button>
-                      <button
-                        type="button"
-                        className={`border rounded p-2 w-full text-xs flex items-center ${
-                          selectedCurrency === "GBP"
-                            ? "border-orange-500 bg-orange-100"
-                            : ""
-                        }`}
-                        onClick={() => setSelectedCurrency("GBP")}
-                      >
-                        <GBFlag className="w-4 h-4 mr-1" /> GBP
-                      </button>
-                      <button
-                        type="button"
-                        className={`border rounded p-2 w-full text-xs flex items-center ${
-                          selectedCurrency === "EUR"
-                            ? "border-orange-500 bg-orange-100"
-                            : ""
-                        }`}
-                        onClick={() => setSelectedCurrency("EUR")}
-                      >
-                        <EUFlag className="w-4 h-4 mr-1" /> EUR
-                      </button>
-                      {/* Add other currencies with flags... */}
-                    </div>
+                    <input
+                      type="password"
+                      placeholder="Enter Investor Password"
+                      className="border-2 pl-4 rounded-md w-full mb-2 text-xs h-10 focus:outline-none"
+                      value={formData.investorpassword}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          investorpassword: e.target.value,
+                        })
+                      }
+                      required
+                    />
+
                     <label className="block mb-1 text-xs">
                       Choose Leverage
                     </label>
-                    <div className="flex gap-2 mb-2 ">
+                    <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-2 mb-2">
                       {[
-                        "100 : 1",
-                        "200 : 1",
-                        "300 : 1",
-                        "400 : 1",
-                        "500 : 1",
+                        "10",
+                        "50",
+                        "100",
+                        "200",
+                        "300",
+                        "500",
+                        "800",
+                        "1000",
                       ].map((leverage) => (
                         <button
                           key={leverage}
@@ -390,65 +331,21 @@ const Account = () => {
                               ? "bg-orange-500 text-white border border-orange-500"
                               : "bg-[#F6F8F8] text-[#2C3E50]"
                           }`}
-                          onClick={() => setActiveLeverage(leverage)}
+                          onClick={() => {
+                            setActiveLeverage(leverage);
+                            setFormData({
+                              ...formData,
+                              leverage: leverage,
+                            });
+                            console.log("Selected Leverage: " + leverage);
+                          }}
+                          required
                         >
                           {leverage}
                         </button>
                       ))}
                     </div>
-                    <label className="block mb-1 text-xs">
-                      Account Balance
-                    </label>
-                    <div className="flex gap-2 mb-2">
-                      <button
-                        type="button"
-                        className="border rounded p-2 w-full text-xs"
-                      >
-                        $1000
-                      </button>
-                      <button
-                        type="button"
-                        className="border rounded p-2 w-full text-xs"
-                      >
-                        $2500
-                      </button>
-                      <button
-                        type="button"
-                        className="border rounded p-2 w-full text-xs"
-                      >
-                        $5k
-                      </button>
-                      {/* Add other balances... */}
-                    </div>
-                    <label className="block mb-1 text-xs">
-                      Additional Notes
-                    </label>
-                    <input
-                      placeholder="Eg. IB/MAM/Server Location"
-                      className="border-2 pl-4 rounded-md w-full mb-2 text-xs h-10 focus:outline-none"
-                    />
 
-                    <div className="flex justify-between mt-4 gap-x-4">
-                      <button
-                        type="submit"
-                        className={`rounded p-2 w-full text-xs ${
-                          isChecked
-                            ? "bg-orange-500 text-white"
-                            : "bg-orange-500 text-white"
-                        }`}
-                        disabled={!isChecked}
-                      >
-                        Submit
-                      </button>
-                      <button
-                        type="button"
-                        onClick={closeModal}
-                        className="border rounded p-2 w-full text-xs"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                    {/* Terms and Conditions */}
                     <div className="mt-4 text-xs">
                       <label className="flex items-center">
                         <input
@@ -456,6 +353,7 @@ const Account = () => {
                           checked={isChecked}
                           onChange={() => setIsChecked(!isChecked)}
                           className="mr-2"
+                          required
                         />
                         By ticking this box:
                       </label>
@@ -516,6 +414,26 @@ const Account = () => {
                           Novotrend.
                         </li>
                       </ol>
+                    </div>
+                    <div className="flex justify-between mt-4 gap-x-4">
+                      <button
+                        type="submit"
+                        className={`rounded p-2 w-full text-xs ${
+                          isChecked
+                            ? "bg-orange-500 text-white"
+                            : "bg-orange-500 text-white"
+                        }`}
+                        disabled={!isChecked}
+                      >
+                        Submit
+                      </button>
+                      <button
+                        type="button"
+                        onClick={closeModal}
+                        className="border rounded p-2 w-full text-xs"
+                      >
+                        Cancel
+                      </button>
                     </div>
                   </form>
                 </div>

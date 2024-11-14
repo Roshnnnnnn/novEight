@@ -41,7 +41,7 @@ const Download = () => {
 
   return (
     <div className="flex bg-[#F6F8F8]">
-      {/* <Side /> */}
+      <Side />
       <div className="lg:w-[60%] md:w-[90%] sm:w-[80%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
         <Navbar />

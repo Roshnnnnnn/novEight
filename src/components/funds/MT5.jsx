@@ -1,37 +1,100 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import Navbar from "../sidebar/Navbar";
+import axios from "axios";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const ACCOUNT_LIST = `${API_BASE_URL}/mt5_accounts_list.php`;
+const TRANSFER = `${API_BASE_URL}/mt5_to_wallet_api.php`;
 
 const MT5 = () => {
+  const [accounts, setAccounts] = useState([]);
   const [fromAccount, setFromAccount] = useState("");
   const [amount, setAmount] = useState("");
   const [note, setNote] = useState("");
-  const accounts = ["Select Account", "Select Account 1", "Select Account 2"];
+  const token = localStorage.getItem("userToken");
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.post(ACCOUNT_LIST, { token });
+        console.log(response);
+        if (response.data.data.response) {
+          setAccounts(response.data.data.response);
+        } else {
+          throw new Error("Invalid response format");
+        }
+      } catch (err) {
+        console.error("Failed to fetch accounts", err);
+        console.error(
+          err.message || "Failed to load accounts. Please try again."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log({ fromAccount, amount, note });
-  };
+    const parsedAmount = parseFloat(amount);
 
-  const handleFromChange = (e) => {
-    setFromAccount(e.target.value);
-  };
+    console.log("Submitting data:", { fromAccount, parsedAmount, note });
 
-  const handleAmountChange = (e) => {
-    setAmount(e.target.value);
-  };
+    if (!fromAccount || !parsedAmount || !note) {
+      console.error("Please fill all fields");
+      return;
+    }
 
-  const getToAccountOptions = () => {
-    return accounts.filter((account) => account !== fromAccount);
-  };
+    if (parsedAmount <= 0) {
+      console.error("Amount must be a positive number");
+      return;
+    }
 
-  const truncateOption = (option) => {
-    const words = option.split(" ");
-    return window.innerWidth <= 768 && words.length > 15
-      ? words.slice(0, 15).join(" ") + "..."
-      : option;
+    const formData = {
+      mt5accountselect: fromAccount,
+      amount: parsedAmount,
+      note,
+      token,
+    };
+
+    console.log("Form data:", formData);
+
+    try {
+      const response = await axios.post(TRANSFER, formData);
+      console.log(response);
+      const result = response.data.data.result;
+      if (result) {
+        console.log(result);
+        // Clear the form fields
+        setFromAccount("");
+        setAmount("");
+        setNote("");
+      } else {
+        console.error("Transfer failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Submission error", err);
+      if (err.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error(
+          `Error: ${
+            err.response.data.message || "An error occurred during the transfer"
+          }`
+        );
+      } else if (err.request) {
+        // The request was made but no response was received
+        console.error("No response received from server. Please try again.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("An error occurred while setting up the request.");
+      }
+    }
   };
 
   return (
@@ -46,38 +109,51 @@ const MT5 = () => {
               <label className="block text-xs font-medium text-gray-700 text-left">
                 From
               </label>
-              <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
-                <option>
-                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
-                </option>
-                <option>
-                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
-                </option>
-                <option>
-                  {truncateOption("516025557 - $0.00 USD - Hedge STP")}
-                </option>
-                {/* Add more options as needed */}
+              <select
+                name="mt5accountselectfrom"
+                id="mt5accountselectfrom"
+                value={fromAccount}
+                onChange={(e) => setFromAccount(e.target.value)}
+                className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10"
+              >
+                <option value="">Select Account</option>
+                {accounts.map((account) => (
+                  <option key={account.id} value={account.accno}>
+                    {account.accno}
+                  </option>
+                ))}
               </select>
-
-              <div className="mb-4 w-full">
-                <label className="block text-xs font-medium text-gray-700 text-left">
-                  To
-                </label>
-                <select className="mt-1 block w-full border border-gray-300 rounded text-xs shadow-sm pl-4 h-10">
-                  <option>516278838 - $0.00 USD - Hedge STP</option>
-                  <option>516278838 - $0.00 USD - Hedge STP</option>
-                  <option>516278838 - $0.00 USD - Hedge STP</option>
-                  {/* Add more options as needed */}
-                </select>
-              </div>
-              <div className="mb-4 w-full">
+              <div className="mb-4 mt-4 w-full">
                 <label className="block text-xs font-medium text-gray-700 text-left">
                   Amount
                 </label>
                 <input
+                  type="text" // Changed to text
+                  id="amount"
+                  name="amount"
+                  value={amount}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (/^\d*\.?\d*$/.test(value)) setAmount(value);
+                  }}
+                  required
+                  placeholder="Enter Amount"
+                  className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
+                  min="0"
+                  style={{ MozAppearance: "textfield", appearance: "none" }}
+                />
+              </div>
+              <div className="mb-4 w-full">
+                <label className="block text-xs font-medium text-gray-700 text-left">
+                  Note
+                </label>
+                <input
                   type="text"
-                  // value={amount}
-                  // onChange={handleAmountChange}
+                  id="note"
+                  name="note"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  required
                   placeholder="Enter Amount"
                   className="w-full p-2 text-xs text-gray-700 font-light border-b border-gray-300 focus:outline-none focus:border-gray-500"
                   min="0"
@@ -85,7 +161,10 @@ const MT5 = () => {
                 />
               </div>
               <div className="mt-4">
-                <button className="w-full  bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg">
+                <button
+                  onClick={handleSubmit}
+                  className="w-full  bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 shadow-lg"
+                >
                   Submit
                 </button>
               </div>

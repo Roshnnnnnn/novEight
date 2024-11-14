@@ -2,6 +2,11 @@ import { useState } from "react";
 import Head from "../sidebar/Head";
 import Side from "../sidebar/Side";
 import Navbar from "../sidebar/Navbar";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const FILTER = `${API_BASE_URL}/get_all_deposit_history_filter.php`;
 
 const DepostReport = () => {
   const [fdate, setFdate] = useState("");
@@ -9,27 +14,60 @@ const DepostReport = () => {
   const [transactionType, setTransactionType] = useState("All");
   const [transactionStatus, setTransactionStatus] = useState("All");
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
-  const [isFiltered, setIsFiltered] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [validationError, setValidationError] = useState("");
+  const token = localStorage.getItem("userToken");
+  const [isFiltered, setIsFiltered] = useState(false);
+  const dispatch = useDispatch();
 
   const today = new Date().toISOString().split("T")[0];
 
-  const handleSubmit = () => {
-    if (!fdate || !edate) {
-      setValidationError("Please select both 'From' and 'To' dates.");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isSubmitButtonDisabled) return;
+
+    if (new Date(fdate) > new Date(edate)) {
+      setValidationError("The 'From' date cannot be later than the 'To' date.");
       return;
     }
 
-    setValidationError("");
-
     setLoading(true);
+    setError(null);
+    setValidationError(null);
 
-    setTimeout(() => {
-      setLoading(false);
+    const requestData = {
+      token,
+      fdate,
+      edate,
+      type: transactionType,
+      status: transactionStatus,
+    };
+
+    try {
+      const response = await axios.post(FILTER, requestData);
+      console.log("API Response:", response);
+
+      if (response.data.data && Array.isArray(response.data.data.response)) {
+        setFilteredData(response.data.data.response);
+      } else {
+        setFilteredData([]);
+        setError(
+          "Unexpected response structure or no data returned from the server."
+        );
+      }
+
       setIsFiltered(true);
-    }, 1000);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(
+        "An error occurred while fetching the data. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
@@ -134,7 +172,7 @@ const DepostReport = () => {
                 </button>
                 {isFiltered && (
                   <button
-                    className="btn text-xs text-black bg-gray-900 hover:bg-gray-700 rounded-md px-4 py-2 shadow-md transition duration-200"
+                    className="btn text-xs text-black bg-gray-200 hover:bg-gray-300 rounded-md px-4 py-2 shadow-md transition duration-200"
                     onClick={handleReset}
                   >
                     Reset
@@ -168,24 +206,42 @@ const DepostReport = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      Invalid Date
-                    </td>
-                    <td className="px-4 py-4 text-xs text-gray-500">1000.00</td>
-                    <td className="px-4 py-4 text-xs text-gray-500">cash</td>
-                    <td className="px-4 py-4 text-xs text-gray-500">Receipt</td>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      kr diya na
-                    </td>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      Approved
-                    </td>
-                    <td className="px-4 py-4 text-xs text-gray-500">
-                      kr diya na
-                    </td>
-                  </tr>
-                  {/* Add more rows as needed */}
+                  {filteredData.length > 0 ? (
+                    filteredData.map((item, index) => (
+                      <tr key={index}>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.date}
+                        </td>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.amount}
+                        </td>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.paymentType}
+                        </td>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.receipt}
+                        </td>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.comment}
+                        </td>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.status}
+                        </td>
+                        <td className="px-4 py-4 text-xs text-gray-500">
+                          {item.remark}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan="7"
+                        className="px-4 py-4 text-xs text-gray-500 text-center"
+                      >
+                        No data available
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
