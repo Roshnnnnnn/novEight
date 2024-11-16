@@ -30,9 +30,12 @@ import Head from "../sidebar/Head";
 import { Link } from "react-router-dom";
 import Navbar from "../sidebar/Navbar";
 import axios from "axios";
+import { setUserInfo } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
 
 const API_BASE_URL = "https://api.novotrend.co/api";
 const LIVE_ACCOUNT_LIST = `${API_BASE_URL}/open_live_account_list.php`;
+const GET_USER = `${API_BASE_URL}/get_users.php`;
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -41,14 +44,45 @@ const Home = () => {
   const [activeButton, setActiveButton] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [bal, setBal] = useState([]);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   const token = localStorage.getItem("userToken");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.post(GET_USER, { token });
+
+        if (response.data.data.response) {
+          const { response: userData } = response.data.data;
+          const userCountryId = userData.user_country || "";
+
+          dispatch(
+            setUserInfo({
+              name: userData.user_name || "",
+              email: userData.user_reg_code || "",
+              mobile: userData.user_mobile || "",
+              dob: userData.req_date || "",
+              country: userCountryId,
+              user_img: userData.user_img || "",
+              authType: userData.user_auth_type || "",
+            })
+          );
+        }
+        // console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchAccount = async () => {
       try {
         const response = await axios.post(LIVE_ACCOUNT_LIST, { token });
-        // console.log(response);
+        console.log(response);
         if (response.data.data.status === 200) {
           const accountsData = response.data.data.response;
           if (Array.isArray(accountsData)) {
@@ -67,6 +101,7 @@ const Home = () => {
     };
 
     fetchAccount();
+    setIsPageLoaded(true);
   }, [token]);
   console.log(bal);
 
@@ -117,7 +152,11 @@ const Home = () => {
   const FlagComponent = countryFlags[selectedCountry];
 
   return (
-    <div className="flex bg-[#F6F7F8]">
+    <div
+      className={`flex bg-[#F6F7F8] transition-opacity duration-700 ${
+        isPageLoaded ? "opacity-100" : "opacity-0"
+      }`}
+    >
       {/* Modal */}
       {isModalOpen && (
         <div
@@ -261,8 +300,8 @@ const Home = () => {
             </div>
           </Carousel> */}
 
-          <div className="relative  mt-4">
-            <div className="bg-white rounded-lg overflow-hidden p-4 hidden lg:block">
+          <div className="mt-4">
+            <div className=" bg-white rounded-lg overflow-hidden p-4 hidden lg:block">
               <div className=" overflow-hidden rounded-lg flex flex-col md:flex-row m-2">
                 <div className="flex-1 mb-4 md:mb-0 mx-2">
                   <div className="flex items-center justify-between">
@@ -281,7 +320,7 @@ const Home = () => {
                       Total Assets Estimate
                     </div>
                   </div>
-                  <div className="text-gray-800 mb-4">
+                  <div className="text-gray-800 mb-4 ">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <span className="w-4 h-3 sm:w-5 sm:h-4 md:w-6 md:h-4">
@@ -311,7 +350,10 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-1 sm:flex sm:flex-wrap gap-2 w-full">
+                  <div
+                    className="grid grid-cols-2 sm:grid-cols-1 sm:flex sm:flex-wrap gap-2 w-full"
+                    style={{ zIndex: -1000 }}
+                  >
                     <button
                       className={`w-full sm:flex-1 min-w-[30px] border border-black text-black ${
                         activeButton === "deposit" ? "bg-blue-500" : ""
@@ -362,7 +404,7 @@ const Home = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex-1 h-auto">
+                <div className="flex-1 h-auto relative">
                   <div
                     className={`text-gray-800 flex justify-center ${
                       accounts.length === 1 ? "items-center" : ""
@@ -377,41 +419,47 @@ const Home = () => {
                       <div className="text-xs sm:text-xs text-gray-400">
                         Trading Account
                       </div>
-                      <div className="flex flex-col mt-2 space-y-3">
-                        {accounts.slice(0, 2).map((account, index) => (
-                          <div
-                            key={index}
-                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0"
-                          >
-                            <div className="flex items-center gap-2 sm:gap-4">
-                              <span className="text-xs sm:text-xs">
-                                {account.account_type}
-                              </span>
-                              <span className="text-xs sm:text-xs">
-                                {account.accno}
-                              </span>
-                              <span className="text-xs sm:text-xs font-semibold">
-                                {account.balance} USD
-                              </span>
+                      {accounts.length === 0 ? (
+                        <div className="text-red-500 text-xs flex justify-center mt-6">
+                          No Account found
+                        </div>
+                      ) : (
+                        <div className="flex flex-col mt-2 space-y-3">
+                          {accounts.slice(0, 2).map((account, index) => (
+                            <div
+                              key={index}
+                              className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0"
+                            >
+                              <div className="flex items-center gap-2 sm:gap-4">
+                                <span className="text-xs sm:text-xs">
+                                  {account.account_type}
+                                </span>
+                                <span className="text-xs sm:text-xs">
+                                  {account.accno}
+                                </span>
+                                <span className="text-xs sm:text-xs font-semibold">
+                                  {account.balance} USD
+                                </span>
+                              </div>
+                              <div className="">
+                                <span className="text-xs sm:text-xs pr-6">
+                                  Leverages:
+                                  {account.leverages}
+                                </span>
+                              </div>
                             </div>
-                            <div className="">
-                              <span className="text-xs sm:text-xs pr-6">
-                                Leverages:
-                                {account.leverages}
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     {accounts.length > 2 && (
                       <button className="text-orange-500 text-xs absolute right-0 mt-2 mr-10">
                         <Link to={"/accountManagement"}>More</Link>
                       </button>
                     )}
-                    {accounts.length === 1 && (
+                    {accounts.length === 0 && (
                       <Link to={"/accountManagement"}>
-                        <button className="text-orange-500 mt-2 text-xs">
+                        <button className="text-orange-500 text-xs absolute right-0 mt-3 mr-10">
                           Create Account
                         </button>
                       </Link>

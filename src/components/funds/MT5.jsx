@@ -17,7 +17,6 @@ const MT5 = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const response = await axios.post(ACCOUNT_LIST, { token });
         console.log(response);
@@ -31,8 +30,6 @@ const MT5 = () => {
         console.error(
           err.message || "Failed to load accounts. Please try again."
         );
-      } finally {
-        setLoading(false);
       }
     };
 

@@ -145,7 +145,7 @@ const CryptoCurrency = () => {
         <Navbar />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50]">
           <div className="p-6 bg-white shadow-md rounded-md">
-            <h2 className="text-2xl font-bold mb-4">Cryptocurrency Deposit</h2>
+            <h2 className="text-2xl font-bold mb-4">Cryptocurrency Withdraw</h2>
             <p className="mb-2">Please choose your preferred cryptocurrency</p>
             <div className="flex space-x-4 mb-6">
               {cryptocurrencies.map((crypto) => (

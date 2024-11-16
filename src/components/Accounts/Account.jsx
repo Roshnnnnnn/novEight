@@ -118,7 +118,7 @@ const Account = () => {
       <div className="lg:w-[60%] md:w-[90%] sm:w-[90%] mx-auto relative z-10 m-2 rounded lg:mt-16 md:mt-4">
         <Head />
         <Navbar />
-        <div className="mx-auto relative z-[-50] m-2 rounded-lg  md:mt-4 h-[80vh]">
+        <div className="mx-auto relative z-[-50] m-2 rounded-lg h-full">
           <div className="flex justify-between gap-4 mb-4">
             <select
               className="border rounded-md px-4 py-1 text-xs bg-white shadow-md"
@@ -209,6 +209,12 @@ const Account = () => {
               </div>
             ))}
           </div>
+
+          {account.length === 0 && (
+            <div className="flex justify-center items-center ">
+              <span className="text-lg ">NO ACCOUNT FOUND</span>
+            </div>
+          )}
 
           {isTradeModalOpen && (
             <div className="fixed inset-0 flex items-center justify-center overlay bg-black bg-opacity-50">

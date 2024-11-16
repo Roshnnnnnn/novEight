@@ -3,13 +3,27 @@ import { CgProfile } from "react-icons/cg";
 import { RiTrademarkLine } from "react-icons/ri";
 import { IoInformationCircle } from "react-icons/io5";
 import { BsBank2 } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+const API_BASE_URL = "https://api.novotrend.co/api";
+const UPDATE_USER = `${API_BASE_URL}/update_user.php`;
 
 const MyProfile = () => {
+  const [userNames, setUserName] = useState("");
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user.userInfo?.name) {
+      let name = user.userInfo?.name;
+      setUserName(name);
+    }
+  }, [user.userInfo?.name]);
   return (
     <div className="">
       <div className="p-6 bg-white shadow-md rounded-lg">
         <div className="flex flex-col md:flex-row items-center">
-          <h2 className="text-sm font-semibold">Umang Hitendra Shah</h2>
+          <h2 className="text-sm font-semibold">{userNames}</h2>
           <p className="text-gray-600 ml-2" style={{ fontSize: "12px" }}>
             UID: 2659752
           </p>
@@ -32,7 +46,7 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4 pt-4 border border-gray-300">
+      {/* <div className="mt-4 pt-4 border border-gray-300">
         <h3 className="text-sm text-orange-500 ml-4">Standard</h3>
         <div className="border-b mt-2 mb-4"></div>
 
@@ -151,7 +165,7 @@ const MyProfile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

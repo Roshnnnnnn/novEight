@@ -193,36 +193,36 @@ export default function Register() {
   return (
     <section
       id="register"
-      className="h-screen flex items-center justify-center bg-gray-100"
+      className="h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 to-orange-50"
     >
-      <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
-        <div className="flex flex-col sm:flex-row">
-          <div className="sm:w-1/2 flex justify-center items-center">
-            <img
-              src={LoginImg}
-              alt="Illustration"
-              className="w-4/5 sm:w-full"
-            />
+      <div className="w-full bg-white shadow-xl rounded-2xl overflow-hidden">
+        <div className="grid sm:grid-cols-2">
+          <div className="hidden sm:flex justify-center items-center bg-orange-50 p-4">
+            <img src={LoginImg} alt="Illustration" className="w-4/5 sm:w-3/4" />
           </div>
-          <div className="sm:w-full flex flex-col justify-center px-8 py-6">
-            <div className="text-center mb-6">
-              <img src={Logo} alt="Logo" className="mx-auto mb-4 w-20" />
-              <h4 className="text-xl font-semibold text-gray-800">Register</h4>
+          <div className="flex flex-col justify-center p-4">
+            <div className="text-center mb-3">
+              <img src={Logo} alt="Logo" className="mx-auto mb-4 w-24" />
+              <h2 className="text-xs font-bold text-gray-800">
+                Create Account
+              </h2>
             </div>
             {errorMessage && (
-              <div className="text-red-500 text-center mb-4">
+              <div className="text-red-500 text-center mb-4 font-medium text-xs">
                 {errorMessage}
               </div>
             )}
             <form onSubmit={handleFormSubmit}>
               {/* Name & Email */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {RegisterArray.slice(0, 2).map((element, key) => (
                   <div className="flex flex-col" key={key}>
-                    <label className="text-gray-700">{element.itemLabel}</label>
+                    <label className="text-xs font-medium text-gray-600">
+                      {element.itemLabel}
+                    </label>
                     <input
                       type={element.itemType}
-                      className="border rounded-md p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className="border rounded-lg p-3 mt-1 bg-gray-50 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400"
                       placeholder={element.itemPlaceholder}
                       value={element.itemValue}
                       name={element.itemName}
@@ -234,13 +234,15 @@ export default function Register() {
               </div>
 
               {/* Password & Confirm Password */}
-              <div className="space-y-4 mt-4">
+              <div className="space-y-3 mt-4">
                 {RegisterArray.slice(2, 4).map((element, key) => (
                   <div className="flex flex-col" key={key}>
-                    <label className="text-gray-700">{element.itemLabel}</label>
+                    <label className="text-xs font-medium text-gray-600">
+                      {element.itemLabel}
+                    </label>
                     <input
                       type={element.itemType}
-                      className="border rounded-md p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      className="border rounded-lg p-3 mt-1 bg-gray-50 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400"
                       placeholder={element.itemPlaceholder}
                       value={element.itemValue}
                       name={element.itemName}
@@ -252,13 +254,13 @@ export default function Register() {
               </div>
 
               {/* Date of Birth */}
-              <div className="flex flex-col mt-4">
-                <label className="text-gray-700">
+              <div className="flex flex-col mt-3">
+                <label className="text-xs font-medium text-gray-600">
                   {RegisterArray[4].itemLabel}
                 </label>
                 <input
                   type={RegisterArray[4].itemType}
-                  className="border rounded-md p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="border rounded-lg p-3 mt-1 bg-gray-50 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400"
                   value={inputFields.dob}
                   name="dob"
                   onChange={handleInputChange}
@@ -267,16 +269,16 @@ export default function Register() {
               </div>
 
               {/* Country & Mobile Number */}
-              <div className="space-y-4 mt-4">
+              <div className="space-y-3 mt-4">
                 {RegisterArray.slice(5, RegisterArray.length - 1).map(
                   (element, key) => (
                     <div className="flex flex-col" key={key}>
-                      <label className="text-gray-700">
+                      <label className="text-xs font-medium text-gray-600">
                         {element.itemLabel}
                       </label>
                       {element.itemType === "select" ? (
                         <select
-                          className="border rounded-md p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          className="border rounded-lg p-3 mt-1 bg-gray-50 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400"
                           value={inputFields.countryCode}
                           name="countryCode"
                           onChange={handleCountryChange}
@@ -292,7 +294,7 @@ export default function Register() {
                       ) : (
                         <input
                           type={element.itemType}
-                          className="border rounded-md p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          className="border rounded-lg p-3 mt-1 bg-gray-50 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400"
                           placeholder={element.itemPlaceholder}
                           name={element.itemName}
                           value={element.itemValue}
@@ -307,17 +309,17 @@ export default function Register() {
               </div>
 
               {/* Terms & Conditions Checkbox */}
-              <div className="flex items-center mt-4">
+              <div className="flex items-center mt-6">
                 <input
                   type="checkbox"
-                  className="border rounded-md p-3 focus:ring-2 focus:ring-blue-400"
+                  className="h-3 w-3 text-orange-500 border-gray-300 rounded focus:ring-2 focus:ring-blue-400"
                   checked={inputFields.inputChecked}
                   name="inputChecked"
                   onChange={handleInputChange}
                 />
-                <span className="ml-2 text-gray-700">
-                  I Agree with the{" "}
-                  <Link to="/terms" className="text-blue-500">
+                <span className="ml-3 text-xs text-gray-600">
+                  I agree with the{" "}
+                  <Link to="/terms" className="text-orange-500 hover:underline">
                     Terms and Conditions
                   </Link>
                 </span>
@@ -326,7 +328,7 @@ export default function Register() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-blue-500 text-white p-3 mt-6 rounded-md hover:bg-blue-600"
+                className="w-full bg-orange-500 text-white py-3 mt-8 rounded-lg hover:bg-orange-600 text-xs focus:ring-2 focus:ring-blue-400 disabled:opacity-50"
                 disabled={isDisabled}
               >
                 Register
@@ -334,7 +336,7 @@ export default function Register() {
 
               <Link
                 to="/login"
-                className="block text-center text-blue-500 mt-4"
+                className="block text-center text-orange-500 mt-4 hover:underline text-xs"
               >
                 Already have an Account? Sign In
               </Link>

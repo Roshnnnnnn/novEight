@@ -71,7 +71,7 @@ const Cash = () => {
             <div className="bg-white shadow-lg p-8 rounded-xl">
               <h1 className="text-xl font-bold mb-4">CASH 💸 </h1>
               <p className="mb-4 text-xs font-semibold">
-                How to fund your account with Apple Pay/Google Pay
+                How to fund your account with Cash
               </p>
               <ol className="list-decimal list-inside mb-4 text-xs">
                 <li>Complete the form below and press ‘Submit’</li>
@@ -88,7 +88,6 @@ const Cash = () => {
                 description, please contact support@Novotrend.com
               </p>
               <div className="py-4">
-                <h1>Apple Pay/Google Pay FORM</h1>
                 <img src="" alt="" />
               </div>
               <form className="grid grid-cols-2 gap-4">

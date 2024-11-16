@@ -28,6 +28,7 @@ const TransferFunds = () => {
     const fetchData = async () => {
       try {
         const response = await axios.post(ACCOUNT_LIST, { token });
+        console.log(response);
         setAccounts(response.data.data.response || []);
       } catch (err) {
         console.error("Failed to fetch accounts", err);
@@ -108,7 +109,7 @@ const TransferFunds = () => {
                 {accounts && accounts.length > 0 ? (
                   accounts.map((account) => (
                     <option key={account.id} value={account.id}>
-                      {account.id}
+                      {account.accno}
                     </option>
                   ))
                 ) : (
@@ -133,7 +134,7 @@ const TransferFunds = () => {
                       .filter((account) => account.id !== fromAccount)
                       .map((account) => (
                         <option key={account.id} value={account.id}>
-                          {account.id}
+                          {account.accno}
                         </option>
                       ))
                   ) : (

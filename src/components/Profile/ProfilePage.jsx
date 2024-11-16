@@ -4,6 +4,7 @@ import Side from "../sidebar/Side";
 import MyProfile from "./MyProfile";
 import SecurityManagement from "./SecurityManagement";
 import TransferIB from "./TransferIB";
+import Navbar from "../sidebar/Navbar";
 
 const ProfilePage = () => {
   const [defaultTab, setDefaultTab] = useState(0);
@@ -19,8 +20,8 @@ const ProfilePage = () => {
       link: "/security",
     },
     {
-      text: "Transfer IB",
-      link: "/transferIB",
+      text: "Ekyc",
+      link: "/ekyc",
     },
   ];
 
@@ -70,6 +71,7 @@ const ProfilePage = () => {
       <Side />
       <div className="lg:w-[60%] md:w-[90%] mx-auto relative z-10 rounded lg:mt-16 md:mt-4">
         <Head />
+        <Navbar />
         <div className="mx-auto relative z-10 m-2 rounded-lg mt-16 z-[-50] bg-white">
           <div className="shadow-md rounded-lg p-2 bg-white">
             <div className="flex flex-wrap p-3 flex flex-wrap p-3 bg-white text-xs gap-x-4 overflow-auto text-xs gap-x-4 overflow-auto">
